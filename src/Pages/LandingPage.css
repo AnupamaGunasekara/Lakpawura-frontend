@@ -10,7 +10,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url('https://c1.wallpaperflare.com/preview/784/803/671/srilanka-ella-landscape-hill.jpg'); /* Specify the URL path to your external image */
+    background-image: url('https://png.pngtree.com/background/20230524/original/pngtree-black-wallpaper-with-dark-designs-on-it-picture-image_2715380.jpg'); /* Specify the URL path to your external image */
     background-size: cover;
     background-position: center;
     z-index: -1; /* Ensures the background image stays behind other elements */
@@ -22,7 +22,7 @@
     justify-content: space-between;
     align-items: center;
     padding: 1rem;
-    background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent background */
+    background-color: rgba(0, 0, 0, 0.9); /* Semi-transparent background */
   }
   
   .signup-button {
@@ -64,7 +64,7 @@
     grid-template-rows: auto auto auto;
     gap: 20px;
     border-radius: 20px;
-    opacity: 0.8;
+    opacity: 0.9;
     width: 350px; /* Adjust width as needed */
     padding: 20px;
     text-align: center;

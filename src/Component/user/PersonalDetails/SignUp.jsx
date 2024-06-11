@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Spinner from "react-bootstrap/Spinner";
 import { useNavigate } from "react-router-dom";
+import './SignUp.css'
 
 
 function SignUp() {
@@ -18,14 +19,12 @@ function SignUp() {
     password: "",
     name: "",
     address: "",
-    tin: "",
-    nameofemployer: "",
     mobileno: "",
     officeno: "",
     homeno: "",
     birthday: "",
-    agreeToannualFee: "",
-    dprSource: "",
+    agreeToConditions: "",
+    lakpawuraSource: "",
   });
 
   const navigate = useNavigate();
@@ -72,28 +71,9 @@ function SignUp() {
 
 
   return (
-    <div>
-      <form
-        onSubmit={handleSubmit}
-        style={{
-          borderRadius: "15px",
-          padding: "20px 40px",
-          backgroundColor: "#D3E9FE",
-          width: "78vw",
-
-          boxShadow: "1px 5px 3px -3px rgba(0,0,0,0.44)",
-        }}
-      >
-        <h2
-          style={{
-            marginBottom: "1%",
-            marginLeft: "35%",
-            color: "#0085FF",
-            fontWeight: "bold",
-          }}
-        >
-          Personal Details
-        </h2>
+    <div className="form-groups">
+      <form onSubmit={handleSubmit}>
+        <h2>Personal Details</h2>
 
         <div className="form-group">
           <label className="lables">Email</label>
@@ -137,36 +117,6 @@ function SignUp() {
               placeholder=""
               onChange={(e) => {
                 setvalues({ ...values, address: e.target.value });
-              }}
-            />
-          </div>
-        </div>
-
-        <div className="form-group">
-          <label className="lables">Tax identification number (TIN)</label>
-          <div className="custom_input">
-            <input
-              className="details-input form-control"
-              type="text"
-              id="tin"
-              placeholder=""
-              onChange={(e) => {
-                setvalues({ ...values, tin: e.target.value });
-              }}
-            />
-          </div>
-        </div>
-
-        <div className="form-group">
-          <label className="lables">Name of the employer</label>
-          <div className="custom_input">
-            <input
-              className="details-input form-control"
-              type="text"
-              id="nameofemployer"
-              placeholder=""
-              onChange={(e) => {
-                setvalues({ ...values, nameofemployer: e.target.value });
               }}
             />
           </div>
@@ -235,7 +185,7 @@ function SignUp() {
         </div>
 
         <div className="form-group">
-          <label className="lables">Password</label>
+          <label className="lables"> New Password</label>
           <div className="custom_input">
             <input
               className="details-input form-control"
@@ -266,7 +216,7 @@ function SignUp() {
           {warning && <p style={{ color: "red" }}>{warning}</p>}
         </div>
 
-        <label className="lables">How do you know DPR</label>
+        <label className="lables">How do you know Lakpawura</label>
         <br></br>
         <br></br>
 
@@ -274,11 +224,11 @@ function SignUp() {
           <input
             type="radio"
             id="friend"
-            name="dprSource"
+            name="lakpawuraSource"
             value="friend"
             className=" form-check-input"
             onChange={(e) =>
-              setvalues({ ...values, dprSource: e.target.value })
+              setvalues({ ...values, lakpawuraSource: e.target.value })
             }
           />
           <label className="form-check-label lables">
@@ -290,11 +240,11 @@ function SignUp() {
           <input
             type="radio"
             id="family"
-            name="dprSource"
+            name="lakpawuraSource"
             value="family"
             className="form-check-input"
             onChange={(e) =>
-              setvalues({ ...values, dprSource: e.target.value })
+              setvalues({ ...values, lakpawuraSource: e.target.value })
             }
           />
           <label className="form-check-label lables">
@@ -306,11 +256,11 @@ function SignUp() {
           <input
             type="radio"
             id="company"
-            name="dprSource"
+            name="lakpawuraSource"
             value="company"
             className="form-check-input"
             onChange={(e) =>
-              setvalues({ ...values, dprSource: e.target.value })
+              setvalues({ ...values, lakpawuraSource: e.target.value })
             }
           />
           <label className="form-check-label lables">
@@ -322,11 +272,11 @@ function SignUp() {
           <input
             type="radio"
             id="socialMedia"
-            name="dprSource"
+            name="lakpawuraSource"
             value="socialmedia"
             className="form-check-input"
             onChange={(e) =>
-              setvalues({ ...values, dprSource: e.target.value })
+              setvalues({ ...values, lakpawuraSource: e.target.value })
             }
           />
           <label className="form-check-label lables">Social Media</label>
@@ -336,41 +286,41 @@ function SignUp() {
           <input
             type="radio"
             id="dprWebsite"
-            name="dprSource"
+            name="lakpawuraSource"
             value="dprWebsite"
             className="form-check-input"
             onChange={(e) =>
-              setvalues({ ...values, dprSource: e.target.value })
+              setvalues({ ...values, lakpawuraSource: e.target.value })
             }
           />
-          <label className="form-check-label lables">DPR Website</label>
+          <label className="form-check-label lables">Lakpawura Website</label>
         </div>
 
         <div className="form-check">
           <input
             type="radio"
             id="other"
-            name="dprSource"
+            name="lakpawuraSource"
             className="form-check-input"
             onChange={(e) =>
-              setvalues({ ...values, dprSource: e.target.value })
+              setvalues({ ...values, lakpawuraSource: e.target.value })
             }
           />
           <label className="form-check-label lables">Other</label>
         </div>
 
         <label className="form-check-label lables">
-          Are you agree with annual fee
+          Are you agree with conditions
         </label>
         <div className="form-check">
           <input
             type="radio"
             id="agree"
-            name="annualFee"
+            name="Conditions"
             value="yes"
             className="form-check-input"
             onChange={(e) =>
-              setvalues({ ...values, agreeToannualFee: e.target.value })
+              setvalues({ ...values, agreeToConditions: e.target.value })
             }
           />
           <label className="form-check-label lables">Yes</label>
@@ -380,11 +330,11 @@ function SignUp() {
           <input
             type="radio"
             id="disagree"
-            name="annualFee"
+            name="Conditions"
             value="no"
             className="form-check-input"
             onChange={(e) =>
-              setvalues({ ...values, agreeToannualFee: e.target.value })
+              setvalues({ ...values, agreeToConditions: e.target.value })
             }
           />
           <label className="form-check-label lables">No</label>
@@ -393,8 +343,7 @@ function SignUp() {
         <div style={{ display: "flex" }}>
           <Button
             type="submit"
-            className="signupButton user"
-            style={{ borderRadius: "10px", marginTop: "3%", marginLeft: "70%" }}
+            className="signup-Button button-color"
             disabled={loading}
           >
             {loading ? (

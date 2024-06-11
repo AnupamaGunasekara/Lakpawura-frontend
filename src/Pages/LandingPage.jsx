@@ -12,7 +12,7 @@ const LandingPage = () => {
     <div className="landing-page">
       <div className="background-image"></div>
       <Navbar className="navigation-bar" expand="lg">
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Toggle aria-controls="basic-navbar-nav"/>
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ml-auto">
             <Nav.Link onClick={() => navigate("/")}>Home</Nav.Link>
