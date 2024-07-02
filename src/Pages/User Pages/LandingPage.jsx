@@ -3,7 +3,7 @@ import React from 'react';
 import { Button, Nav, Navbar } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import './LandingPage.css';                                                                            
-import logo from '../assets/logo.png'                                                      
+import logo from '../../assets/logo.png'                                                      
 
 const LandingPage = () => {
   const navigate = useNavigate();

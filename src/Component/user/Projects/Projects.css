@@ -1,0 +1,144 @@
+/* Projects.css */
+
+body {
+  background-color: white !important; /* Dark background */
+  background-image: url('');
+  font-family: Arial, sans-serif;
+}
+
+.container-1 {
+  display: flex;
+  height: 100vh;
+}
+
+.navbar-post {
+  width: 20%;  /* Set width to 20% */
+  background-color: rgb(228, 226, 238);
+  padding: 10px;
+}
+
+.container-post {
+  width: 80%;
+  padding: 10px;
+  background-color: #d0ccc7;
+}
+
+.create-post {
+  width: 100vw;
+}
+
+/* post styles */
+.create-post-modal .ant-modal-content {
+  background-color: white; /* Light background for the modal */
+  padding: 5%;
+}
+
+.post-creator {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  padding: 1%;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  background-color: #c19a65;
+}
+
+.post-creator-name {
+  margin-left: 10px;
+}
+
+.post-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.create-post-form {
+  padding: 1%;
+  background-color: white;
+  border-radius: 10px;
+}
+
+.post {
+  margin-top: 20px;
+  padding: 10px;
+  margin-left: 150px;
+  margin-right: 150px;
+  border: 3px solid #c19a6b;
+  border-radius: 5px;
+  color: #2f2f2f;
+}
+
+.post img {
+  width: 500px;
+  height: 500px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+
+
+.emoji-picker {
+  position: absolute;
+  z-index: 1000;
+  top: 100px; /* Adjust as needed */
+  left: 100px; /* Adjust as needed */
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background: white;
+  padding: 10px;
+  max-width: 320px;
+}
+
+.logo button {
+  background: none;
+  border: none;
+  color: white;
+}
+
+.ant-input-affix-wrapper {
+  color: white;
+  background-color: #555;
+  border-radius: 20px;
+}
+
+.ant-menu-dark {
+  background-color: transparent;
+  border-bottom: none;
+}
+
+.ant-menu-dark .ant-menu-item {
+  color: white;
+}
+
+
+/* comment areas */
+
+.comment{
+  margin: 5px;
+}
+.comment-form{
+  width: 65%;
+  display: flex;
+  flex-direction: row; /* or column */
+  gap: 16px; /* Adjust the value to your desired gap size */
+ 
+}
+.reply-form{
+  width: 50%;
+  display: flex;
+  flex-direction: row; /* or column */
+  gap: 16px; /* Adjust the value to your desired gap size */
+  margin-left: 40px;
+ 
+}
+.comment-input{
+    width: 5%;
+    background-color: green;
+
+}
+.comment-button{
+  width: 20%;
+
+}

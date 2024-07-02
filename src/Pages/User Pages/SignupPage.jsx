@@ -1,6 +1,6 @@
 import React from 'react'
-import SignUp from '../Component/user/PersonalDetails/SignUp'
-import Header from '../Component/user/Header/Header'
+import Header from '../../Component/user/Header/Header'
+import SignUp from '../../Component/user/PersonalDetails/SignUp'
 
 export default function () {
   return (
