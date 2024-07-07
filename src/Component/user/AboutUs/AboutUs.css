@@ -1,0 +1,83 @@
+/* src/components/AboutUs.css */
+.about-us {
+  background-color: #1a1a1a;
+  color: #fff;
+  padding: 120px;
+  text-align: center;
+  background-image: url(https://images.pexels.com/photos/3114462/pexels-photo-3114462.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1);
+}
+
+
+/* .about-us-header {
+  background: #ffffff;
+  color: #fff;
+  padding: 40px 20px;
+  position: relative;
+} */
+
+.about-us-header .logo {
+  height: 100;
+  width: 100;
+  position: absolute;
+  top: 20px;
+  left: 20px;
+}
+.logo{
+  position: absolute;
+  height: 100px;
+  width: 100px;
+  margin-top: 100px;
+  margin-left: 100px;
+}
+
+.company-info section{
+  padding: auto;
+  padding-top: 1000px;
+}
+.highlighted {
+  background-color: #640083;
+  padding: 5px 10px;
+  display: inline-block;
+  color: #fff;
+}
+
+.section {
+  padding: 60px 20px;
+  margin-bottom: 20px;
+}
+
+.section-img {
+  width: 100%;
+  height: auto;
+  margin-bottom: 20px;
+  padding: auto;
+
+}
+
+.section-content {
+  text-align: left;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.team-members .ant-card {
+  margin-bottom: 20px;
+}
+
+.services .ant-card {
+  margin-bottom: 20px;
+}
+
+.about-us-footer {
+  background: #000;
+  color: #fff;
+  padding: 40px 20px;
+}
+
+.ant-card-meta-title {
+  color: #fff;
+}
+
+.ant-card-meta-description {
+  color: #b0b0b0;
+}
