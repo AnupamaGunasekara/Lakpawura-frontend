@@ -18,6 +18,7 @@ export default function Header() {
                         <Nav.Link onClick={() => navigate("/projects")}>Projects</Nav.Link>
                         <Nav.Link onClick={() => navigate("/contact")}>Contact</Nav.Link>
                         <Nav.Link onClick={() => navigate("/account")}>My Account</Nav.Link>
+                        
                     </Nav>
                     <div className="brand-container">
                         <img className='logo-png' src={logo} alt="Logo" />

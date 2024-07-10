@@ -1,19 +1,13 @@
-/* src/components/AboutUs.css */
+
 .about-us {
   background-color: #1a1a1a;
   color: #fff;
   padding: 120px;
   text-align: center;
-  background-image: url(https://images.pexels.com/photos/3114462/pexels-photo-3114462.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1);
+  background-image: url('../../../assets/banner-bg.png');
 }
 
 
-/* .about-us-header {
-  background: #ffffff;
-  color: #fff;
-  padding: 40px 20px;
-  position: relative;
-} */
 
 .about-us-header .logo {
   height: 100;
@@ -29,17 +23,78 @@
   margin-top: 100px;
   margin-left: 100px;
 }
+.company-overview-section {
+  position: relative;
+  height: 100vh; 
+  background-size: cover; 
+  background-position: center; 
+  background-repeat: no-repeat; 
+  background-attachment: fixed; 
+  margin-top: -60px;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5); 
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white; 
+  padding: 20px;
+  text-align: center;
+}
+
+.about-us-header .logo {
+  width: 100px; 
+  height: auto;
+}
+
+.highlighted {
+  color: #FFD700; 
+}
+
+.company-info h2, .company-info p {
+  margin: 20px 0;
+}
+
+.about-us-header .logo {
+  width: 100px; 
+  height: auto;
+}
+
+
+.company-info h2, .company-info p {
+  margin: 20px 0;
+}
 
 .company-info section{
   padding: auto;
   padding-top: 1000px;
 }
 .highlighted {
-  background-color: #640083;
-  padding: 5px 10px;
+ 
+  
+  padding: 50px 100px;
   display: inline-block;
   color: #fff;
+  font-size: 100px;
+  
 }
+.highlighted {
+  font-size: 4.5em;
+  font-weight: bold;
+  margin-bottom: 20px; 
+  margin-top: -2000px;
+  
+}
+
+
+
 
 .section {
   padding: 60px 20px;
@@ -69,7 +124,7 @@
 }
 
 .about-us-footer {
-  background: #000;
+  background: #000000bd;
   color: #fff;
   padding: 40px 20px;
 }
@@ -80,4 +135,71 @@
 
 .ant-card-meta-description {
   color: #b0b0b0;
+}
+.company-info p {
+  font-size: 20px;
+  padding-top: 25px;
+}
+
+
+@keyframes typewriter {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+@keyframes blinkTextCursor {
+  0% { border-right-color: rgba(255, 255, 255, 0.75); }
+  50% { border-right-color: transparent; }
+  100% { border-right-color: rgba(255, 255, 255, 0.75); }
+}
+
+.company-overview-section {
+  position: relative;
+  height: 100vh; 
+  background-size: cover; 
+  background-position: center; 
+  background-repeat: no-repeat; 
+  background-attachment: fixed; 
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5); 
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white; 
+  padding: 20px;
+  text-align: center;
+}
+
+.about-us-header .logo {
+  width: 100px; 
+  height: auto;
+}
+
+.highlighted {
+  color: #FFD700; 
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: 0.15em solid rgba(255, 255, 255, 0.75); 
+  
+  animation: 
+    typewriter 3s steps(30, end),
+    blinkTextCursor 0.75s step-end infinite;
+
+  line-height: 0.35; 
+  
+  border-right-width: 0.2em; 
+
+}
+
+.company-info h2, .company-info p {
+  margin: 20px 0;
 }

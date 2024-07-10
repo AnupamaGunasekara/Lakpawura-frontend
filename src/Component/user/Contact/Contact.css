@@ -1,0 +1,47 @@
+.contact {
+    padding: 50px 0;
+}
+
+.contact img {
+    width: 100%;
+    height: auto;
+}
+
+.contact h2 {
+    margin-bottom: 30px;
+}
+
+.contact form {
+    display: flex;
+    flex-direction: column;
+}
+
+.contact input,
+.contact textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.contact button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    border: none;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.contact button:hover {
+    background-color: #0056b3;
+}
+
+.contact .success {
+    color: green;
+}
+
+.contact .danger {
+    color: red;
+}
