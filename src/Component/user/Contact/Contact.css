@@ -1,5 +1,6 @@
 .contact {
     padding: 50px 0;
+    background-image: url('../../../assets/banner-bg.png');
 }
 
 .contact img {
@@ -44,4 +45,28 @@
 
 .contact .danger {
     color: red;
+}
+
+.about-us-footer {
+    background: #000000;
+    color: #fff;
+    padding: 40px 20px;
+}
+
+.about-us-footer .ant-row {
+    margin-bottom: 10px;
+}
+
+.about-us-footer .ant-col {
+    text-align: center;
+}
+
+.about-us-footer .ant-btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.about-us-footer .ant-btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
 }

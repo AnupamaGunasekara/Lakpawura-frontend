@@ -7,7 +7,7 @@ import LandingPage from "./Pages/User Pages/LandingPage.jsx";
 import ProjectsPage from "./Pages/User Pages/ProjectsPage.jsx";
 import SignupPage from "./Pages/User Pages/SignupPage.jsx";
 import AboutUsPage from "./Pages/User Pages/AboutUsPage.jsx";
-import ContactPage from "./Component/user/Contact/Contact.jsx";
+import ContactPage from "./Pages/User Pages/ContactPage.jsx";
 import "./index.css";
 
 
