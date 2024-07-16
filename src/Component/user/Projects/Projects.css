@@ -1,9 +1,8 @@
-/* Projects.css */
-
 body {
-  background-color: white !important; /* Dark background */
-  background-image: url('');
-  font-family: Arial, sans-serif;
+  background-color: #f0f2f5; /* Light gray background */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
 }
 
 .container-1 {
@@ -11,40 +10,45 @@ body {
   height: 100vh;
 }
 
+.menu-div {
+  height: 100vh;
+  background-color: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
 .navbar-post {
-  width: 20%;  /* Set width to 20% */
-  background-color: rgb(228, 226, 238);
-  padding: 10px;
+  width: 20%;
 }
 
 .container-post {
   width: 80%;
-  padding: 10px;
-  background-color: #d0ccc7;
+  padding: 20px;
+  background-color: white;
+  border-left: 1px solid #e8e8e8;
+  overflow-y: auto;
+}
+
+.create-post-button {
+  width: fit-content;
 }
 
 .create-post {
-  width: 100vw;
+  width: 100%;
 }
 
-/* post styles */
 .create-post-modal .ant-modal-content {
-  background-color: white; /* Light background for the modal */
-  padding: 5%;
+  padding: 20px;
 }
 
 .post-creator {
   display: flex;
   align-items: center;
   margin-bottom: 10px;
-  padding: 1%;
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
-  background-color: #c19a65;
 }
 
 .post-creator-name {
   margin-left: 10px;
+  font-weight: 600;
 }
 
 .post-actions {
@@ -54,91 +58,57 @@ body {
 }
 
 .create-post-form {
-  padding: 1%;
   background-color: white;
+  padding: 20px;
   border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .post {
-  margin-top: 20px;
-  padding: 10px;
-  margin-left: 150px;
-  margin-right: 150px;
-  border: 3px solid #c19a6b;
-  border-radius: 5px;
-  color: #2f2f2f;
+  background-color: white;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .post img {
-  width: 500px;
-  height: 500px;
-  border-radius: 5px;
-  margin-bottom: 10px;
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  margin-top: 10px;
 }
 
-
-
-.emoji-picker {
-  position: absolute;
-  z-index: 1000;
-  top: 100px; /* Adjust as needed */
-  left: 100px; /* Adjust as needed */
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  background: white;
-  padding: 10px;
-  max-width: 320px;
-}
-
-.logo button {
-  background: none;
-  border: none;
-  color: white;
-}
-
-.ant-input-affix-wrapper {
-  color: white;
-  background-color: #555;
-  border-radius: 20px;
-}
-
-.ant-menu-dark {
-  background-color: transparent;
-  border-bottom: none;
-}
-
-.ant-menu-dark .ant-menu-item {
-  color: white;
-}
-
-
-/* comment areas */
-
-.comment{
-  margin: 5px;
-}
-.comment-form{
-  width: 65%;
+.pagination {
   display: flex;
-  flex-direction: row; /* or column */
-  gap: 16px; /* Adjust the value to your desired gap size */
- 
+  justify-content: center;
+  margin-top: 20px;
 }
-.reply-form{
-  width: 50%;
+
+.container-post {
   display: flex;
-  flex-direction: row; /* or column */
-  gap: 16px; /* Adjust the value to your desired gap size */
-  margin-left: 40px;
- 
+  flex-direction: column;
+  min-height: 80vh; /* Adjust this based on your layout */
 }
-.comment-input{
-    width: 5%;
-    background-color: green;
 
+.posts-container {
+  flex: 1;
 }
-.comment-button{
-  width: 20%;
 
+.pagination-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.black-font {
+  color: black;
+}
+
+.uploaded-image img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  margin-top: 10px;
 }
