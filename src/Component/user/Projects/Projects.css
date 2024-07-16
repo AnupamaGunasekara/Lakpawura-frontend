@@ -26,10 +26,14 @@ body {
   background-color: white;
   border-left: 1px solid #e8e8e8;
   overflow-y: auto;
+  display: flex;
+  flex-direction: column;
 }
 
 .create-post-button {
   width: fit-content;
+  align-self: flex-start;
+  margin-bottom: 20px;
 }
 
 .create-post {

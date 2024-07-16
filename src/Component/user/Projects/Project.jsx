@@ -106,23 +106,34 @@ const Project = () => {
     <div className='container-1'>
       <div className="navbar-post">
         <div className="menu-div">
-          <Menu mode="vertical" style={{ height: "100%" }}>
-            <Menu.Item key="search" style={{ marginBottom: '10px' }}>
-              <Input.Search placeholder="Search posts" onSearch={(value) => console.log(value)} enterButton />
-            </Menu.Item>
-            <Menu.Item key="home" icon={<HomeOutlined />}>
-              Home
-            </Menu.Item>
-            <Menu.Item key="video" icon={<PlayCircleOutlined />}>
-              Watch
-            </Menu.Item>
-            <Menu.Item key="market" icon={<ShoppingCartOutlined />}>
-              Marketplace
-            </Menu.Item>
-            <Menu.Item key="group" icon={<UserOutlined />}>
-              Groups
-            </Menu.Item>
-          </Menu>
+          <Menu mode="vertical" style={{ height: "100%" }} items={[
+            {
+              key: 'search',
+              label: (
+                <Input.Search placeholder="Search posts" onSearch={(value) => console.log(value)} enterButton />
+              ),
+            },
+            {
+              key: 'home',
+              icon: <HomeOutlined />,
+              label: 'Home',
+            },
+            {
+              key: 'video',
+              icon: <PlayCircleOutlined />,
+              label: 'Watch',
+            },
+            {
+              key: 'market',
+              icon: <ShoppingCartOutlined />,
+              label: 'Marketplace',
+            },
+            {
+              key: 'group',
+              icon: <UserOutlined />,
+              label: 'Groups',
+            },
+          ]} />
         </div>
       </div>
       <div className='container-post'>
@@ -131,7 +142,7 @@ const Project = () => {
         </Button>
         <Modal
           title={isEditMode ? "Edit Post" : "Create Post"}
-          visible={isModalVisible}
+          open={isModalVisible}
           onCancel={handleCancel}
           footer={null}
           className="create-post-modal"
