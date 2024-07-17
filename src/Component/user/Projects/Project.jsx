@@ -96,15 +96,14 @@ const Project = () => {
 
   const handleUpload = (info) => {
     let fileList = [...info.fileList];
-    console.log("---------------")
-    console.log(fileList)
+    console.log("---------------");
+    console.log(fileList);
     // Limit to one file
     fileList = fileList.slice(-1);
-  
+
     // Update state with the fileList
     setUploadedImage(fileList[0]);
   };
-  
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
@@ -249,11 +248,7 @@ const Project = () => {
             </Form.Item>
             {uploadedImage && (
               <div className="uploaded-image">
-                <img
-                  src=""
-                  alt="Uploaded"
-                  style={{ maxWidth: "100%" }}
-                />
+                <img src="" alt="Uploaded" style={{ maxWidth: "100%" }} />
               </div>
             )}
             <div className="post-actions">
@@ -293,7 +288,8 @@ const Project = () => {
               </div>
               <h3>{post.title}</h3>
               <h6 style={{ color: "gray" }}>
-                {post.category.replace("category", "Category ")}
+                {post.category &&
+                  post.category.replace("category", "Category ")}
               </h6>
               <p>{post.description}</p>
               {post.image && (
@@ -335,4 +331,3 @@ const Project = () => {
 };
 
 export default Project;
-
