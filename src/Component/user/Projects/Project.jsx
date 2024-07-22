@@ -19,7 +19,7 @@ import {
   Upload,
 } from "antd";
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Projects.css";
 
 const { Option } = Select;
@@ -33,7 +33,11 @@ const Project = () => {
   const [uploadedImage, setUploadedImage] = useState(null);
   const [form] = Form.useForm();
   const [currentPage, setCurrentPage] = useState(1);
-  const pageSize = 1; // Display one post per page
+  const pageSize = 10; // Display one post per page
+
+  useEffect(() => {
+    getPosts();
+  }, []);
 
   const showModal = () => {
     setIsModalVisible(true);
@@ -51,8 +55,8 @@ const Project = () => {
     const formData = new FormData();
     formData.append("title", values.title);
     formData.append("category", values.category);
-    formData.append("description", values.description);
-    formData.append("creator", "Anupama");
+    formData.append("discription", values.discription);
+    formData.append("author", "Anupama");
     formData.append("date", new Date());
     formData.append("comments", JSON.stringify([]));
     formData.append("rating", isEditMode ? currentPost.rating : 0);
@@ -75,9 +79,11 @@ const Project = () => {
           );
           setPosts(updatedPosts);
           message.success("Post updated successfully!");
+          window.location.reload();
         } else {
           setPosts([...posts, newPost]);
           message.success("Post created successfully!");
+          window.location.reload();
         }
 
         form.resetFields();
@@ -116,9 +122,24 @@ const Project = () => {
     form.setFieldsValue({
       title: post.title,
       category: post.category,
-      description: post.description,
+      discription: post.discription,
     });
     showModal();
+  };
+
+  const getPosts = async () => {
+    try {
+      const response = await axios.get(`${base_url}/api/user/getPosts`);
+      if (response.status === 200) {
+        setPosts(response.data.data);
+        console.log(response.data.data);
+      } else {
+        message.error("Failed to fetch posts!");
+      }
+    } catch (error) {
+      console.error("Error fetching posts:", error);
+      message.error("Failed to fetch posts!");
+    }
   };
 
   const formatDate = (date) => {
@@ -243,7 +264,7 @@ const Project = () => {
                 <Option value="category5">Category 5</Option>
               </Select>
             </Form.Item>
-            <Form.Item name="description">
+            <Form.Item name="discription">
               <Input.TextArea rows={5} placeholder="Write something..." />
             </Form.Item>
             {uploadedImage && (
@@ -272,7 +293,7 @@ const Project = () => {
               <div style={{ display: "flex", alignItems: "center" }}>
                 <Avatar size="medium" icon={<UserOutlined />} />
                 <div style={{ paddingLeft: "5px" }}>
-                  <div>{post.creator}</div>
+                  <div>{post.author}</div>
                   <div>
                     <p
                       style={{
@@ -281,7 +302,7 @@ const Project = () => {
                         display: "block",
                       }}
                     >
-                      {formatDate(post.date)}
+                      {formatDate(post.updatedAt)}
                     </p>
                   </div>
                 </div>
@@ -291,11 +312,11 @@ const Project = () => {
                 {post.category &&
                   post.category.replace("category", "Category ")}
               </h6>
-              <p>{post.description}</p>
-              {post.image && (
+              <p>{post.discription}</p>
+              {post.images && post.images.length > 0 && (
                 <div className="uploaded-image">
                   <img
-                    src={`/uploads/${post.image}`}
+                    src={post.images[0].path}
                     alt="Post"
                     style={{ maxWidth: "100%" }}
                   />
