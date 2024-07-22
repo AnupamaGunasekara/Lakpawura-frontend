@@ -1,34 +1,46 @@
 import React, { useState, useEffect } from 'react';
-import {
-  MailOutlined,
-  MenuFoldOutlined,
-  MenuUnfoldOutlined,
-  PlusOutlined,
-  ProfileOutlined,
-  SettingOutlined
-} from '@ant-design/icons';
-import { Button, Menu, List } from 'antd';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate
-import axios from 'axios'; // Ensure axios is imported
+import { MailOutlined, MenuFoldOutlined, MenuUnfoldOutlined, PlusOutlined, ProfileOutlined, SettingOutlined } from '@ant-design/icons';
+import { Button, Menu, List, Modal, Input, message as antdMessage } from 'antd';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 export default function Messages() {
   const [collapsed, setCollapsed] = useState(false);
-  const navigate = useNavigate(); // Initialize navigate hook
+  const navigate = useNavigate();
   const [messages, setMessages] = useState([]);
-
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [replyModalVisible, setReplyModalVisible] = useState(false);
+  const [currentMessage, setCurrentMessage] = useState("");
+  const [reply, setReply] = useState("");
+  
   const base_url = import.meta.env.VITE_APP_BACKEND_URL;
 
   useEffect(() => {
     const fetchAllMessages = async () => {
       try {
         const res = await axios.get(`${base_url}/api/admin/getmessages`);
-        setMessages(res.data); // Assuming the API returns an array of messages
+        setMessages(res.data);
       } catch (err) {
         console.error(err);
       }
     };
     fetchAllMessages();
   }, []);
+
+  const formatDate = (date) => {
+    const now = new Date();
+    const postDate = new Date(date);
+    const isToday = now.toDateString() === postDate.toDateString();
+    const isThisYear = now.getFullYear() === postDate.getFullYear();
+
+    if (isToday) {
+      return postDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    } else if (isThisYear) {
+      return `${postDate.getDate()}th ${postDate.toLocaleString('default', { month: 'long' })}, ${postDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`;
+    } else {
+      return `${postDate.getDate()}th ${postDate.toLocaleString('default', { month: 'long' })} ${postDate.getFullYear()}, ${postDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`;
+    }
+  };
 
   const toggleCollapsed = () => {
     setCollapsed(!collapsed);
@@ -40,7 +52,7 @@ export default function Messages() {
         navigate('/account');
         break;
       case '2':
-        navigate('/messages'); // Navigate to messages page
+        navigate('/messages');
         break;
       case '3':
         navigate('/add-admin');
@@ -48,6 +60,29 @@ export default function Messages() {
       default:
         console.log('Menu item:', e.key);
     }
+  };
+
+  const handleSeeMore = (message) => {
+    setCurrentMessage(message);
+    setIsModalVisible(true);
+  };
+
+  const handleModalClose = () => {
+    setIsModalVisible(false);
+    setReplyModalVisible(false);
+  };
+
+  const handleReplyClick = (message) => {
+    setCurrentMessage(message);
+    setReplyModalVisible(true);
+  };
+
+  const handleSendReply = () => {
+    // Simulate sending the reply
+    console.log("Sending reply:", reply);
+    setReply("");
+    setReplyModalVisible(false);
+    antdMessage.success("Message sent successfully!");
   };
 
   return (
@@ -109,22 +144,28 @@ export default function Messages() {
           onClick={handleMenuClick}
         />
       </div>
-      <div style={{ width: "70%", height: "100vh", overflow: "auto" }}>
+      <div style={{ width: "70%", height: "100vh" }}>
         <List
-          style={{ margin: "10px", color: "white" }}
+          style={{ margin: "40px", color: "white" }}
           itemLayout="horizontal"
           dataSource={messages}
           renderItem={(item) => (
             <List.Item
-              actions={[<Button type="primary" onClick={() => console.log("Replying to:", item.email)}>Reply</Button>]}
+              actions={[<Button type="primary" onClick={() => handleReplyClick(item)}>Reply</Button>]}
             >
               <List.Item.Meta
-                title={<h4 style={{color:"white"}}>{`${item.firstName} ${item.lastName}`}</h4>}
+                title={<div style={{ display: "flex" }}><h4 style={{ color: "white" }}>{`${item.firstName} ${item.lastName}`}</h4></div>}
                 description={
                   <>
-                    <p style={{color:"white"}}>{`Email: ${item.email}`}</p>
-                    <p style={{color:"white"}}>{`Phone: ${item.phone}`}</p>
-                    <p style={{color:"white"}}>{`Message: ${item.message}`}</p>
+                    <h6 style={{ color: "gray" }}>{`${formatDate(item.createdAt)}`}</h6>
+                    <div style={{ display: "flex" }}>
+                      <p style={{ color: "#c19a6b", marginRight: "20px" }}>{`${item.email}`}</p>
+                      <p style={{ color: "#c19a6b" }}>{`${item.phone}`}</p>
+                    </div>
+                    <p style={{ color: "white", display: "-webkit-box", WebkitLineClamp: "3", WebkitBoxOrient: "vertical", overflow: "hidden" }}>
+                      {`${item.message}`}
+                    </p>
+                    <a onClick={() => handleSeeMore(item.message)} style={{ color: "gray", fontSize: "smaller" }}>See More</a>
                   </>
                 }
               />
@@ -132,6 +173,21 @@ export default function Messages() {
           )}
         />
       </div>
+      <Modal title="Full Message" visible={isModalVisible} onOk={handleModalClose} onCancel={handleModalClose} footer={[
+        <Button key="back" onClick={handleModalClose}>
+          Close
+        </Button>
+      ]}>
+        <p>{currentMessage}</p>
+      </Modal>
+      <Modal title={`Reply to ${currentMessage.firstName} ${currentMessage.lastName}`} visible={replyModalVisible} onOk={handleSendReply} onCancel={handleModalClose} footer={[
+        <Button key="back" onClick={handleModalClose}>Close</Button>,
+        <Button key="submit" type="primary" onClick={handleSendReply}>
+          Send
+        </Button>
+      ]}>
+        <Input.TextArea rows={4} value={reply} onChange={(e) => setReply(e.target.value)} placeholder="Type your reply here..." />
+      </Modal>
     </div>
   );
 }

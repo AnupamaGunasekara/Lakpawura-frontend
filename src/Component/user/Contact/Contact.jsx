@@ -2,6 +2,7 @@ import { FacebookOutlined, GlobalOutlined, InstagramOutlined, PhoneOutlined, Twi
 import axios from 'axios'; // Import Axios
 import React, { useState } from 'react';
 import { Button, Col, Container, Row } from 'react-bootstrap';
+import {message as antdMessage } from 'antd';
 import contactImg from '../../../assets/contact-img.svg';
 import './Contact.css';
 
@@ -35,11 +36,14 @@ const Contact = () => {
             const response = await axios.post(`${base_url}/api/user/contactUs`, formDetails);
             console.log(response.data);
             setStatus({ success: true, message: 'Message sent successfully!' });
+            antdMessage.success("Message sent successfully!");
         } catch (error) {
             console.error('Sending message failed: ', error);
             setStatus({ success: false, message: 'Failed to send message.' });
+            antdMessage.error("Message sent unsuccessfull!");
         } finally {
             setButtonText('Send'); // Reset button text
+            setFormDetails(formInitialDetails);
         }
     };
 
@@ -98,12 +102,6 @@ const Contact = () => {
                                         ></textarea>
                                         <button type="submit"><span>{buttonText}</span></button>
                                     </Col>
-                                    {
-                                        status.message &&
-                                        <Col>
-                                            <p className={status.success === false ? "danger" : "success"}>{status.message}</p>
-                                        </Col>
-                                    }
                                 </Row>
                             </form>
                         </Col>

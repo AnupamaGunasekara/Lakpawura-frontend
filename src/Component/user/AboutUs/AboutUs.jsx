@@ -17,9 +17,7 @@ const AboutUs = () => {
         <div className="company-info">
           <h2>Our Company</h2>
           <p>
-            Welcome to LAKPAWRA, where we specialize in providing exceptional services.
-            Our mission is to deliver top-quality products and services to our clients.
-            We pride ourselves on our commitment to excellence and customer satisfaction.
+          Lakwapura is a non-governmental organization (NGO) based in Sri Lanka, dedicated to empowering local communities through sustainable development initiatives. The NGO focuses on various sectors such as education, health, environmental conservation, and economic development. By implementing grassroots projects and collaborating with local and international partners, Lakwapura aims to improve the quality of life for underserved populations. Their holistic approach ensures that communities are not only equipped with the necessary resources and skills but are also supported in building a sustainable future. Through their efforts, Lakwapura is committed to fostering social equity, environmental stewardship, and economic resilience across Sri Lanka.
           </p>
         </div>
       </div>
