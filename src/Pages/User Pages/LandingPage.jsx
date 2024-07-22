@@ -4,6 +4,8 @@ import { Button, Form, Modal, Nav, Navbar } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import './LandingPage.css';
 import logo from '../../assets/logo.png';
+import  Axios from "axios";
+
 
 const LandingPage = () => {
   const navigate = useNavigate();
@@ -14,13 +16,23 @@ const LandingPage = () => {
   const [adminId, setAdminId] = useState('');
   const [adminname, setAdminname] = useState('');
   const [loginError, setLoginError] = useState(false);
+  const base_url = import.meta.env.VITE_APP_BACKEND_URL;
 
-  const handleUserLogin = () => {
-    if (username === "example@example.com" && password === "password") {
-      navigate("/projectsUser");
-    } else {
-      setLoginError(true);
-      alert("Your login details are incorrect.");
+  const handleUserLogin = async() => {
+    try {
+
+      const res = await Axios.post(`${base_url}/api/user/login`, {
+        email: username,
+        password: password
+      });
+      if (res.data.Status === "Success") {
+        navigate("/projectsUser");
+      } else {
+        
+        alert("Login Failed!");
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
 
