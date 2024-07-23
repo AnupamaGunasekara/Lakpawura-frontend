@@ -3,10 +3,11 @@ import Button from "react-bootstrap/Button";
 import Spinner from "react-bootstrap/Spinner";
 import { useNavigate } from "react-router-dom";
 import './SignUp.css'
+import  Axios from "axios";
 
 
 function SignUp() {
-//   const base_url = import.meta.env.VITE_APP_BACKEND_URL;
+  const base_url = import.meta.env.VITE_APP_BACKEND_URL;
   useEffect(() => {
     console.log("Cookies:", document.cookie);
   }, []);
@@ -28,7 +29,7 @@ function SignUp() {
   });
 
   const navigate = useNavigate();
-//   Axios.defaults.withCredentials = true;
+   Axios.defaults.withCredentials = true;
 
   //submiting PersonalDetails to backend
   const handleSubmit = async (event) => {
@@ -52,10 +53,10 @@ function SignUp() {
 
     try {
       setLoading(true);
-      const res = await Axios.post(`${base_url}/api/taxpayer/register`, values);
+      const res = await Axios.post(`${base_url}/api/user/register`, values);
       console.log(res.data.message);
       if (res.data.Status === "Success") {
-        navigate("/UserHomePage");
+        navigate("/projectsUser");
       } else if (res.data.message == "already registered email") {
         alert("Email is already registered! Please Enter another one");
         setLoading(false);

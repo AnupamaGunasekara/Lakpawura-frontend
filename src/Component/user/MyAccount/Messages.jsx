@@ -19,6 +19,7 @@ export default function Messages() {
     const fetchAllMessages = async () => {
       try {
         const res = await axios.get(`${base_url}/api/admin/getmessages`);
+        console.log(res)
         setMessages(res.data);
       } catch (err) {
         console.error(err);
