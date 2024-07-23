@@ -89,6 +89,16 @@ import "./Projects.css";
     const toggleCollapsed = () => {
       setCollapsed(!collapsed);
     };
+
+    const handleLogout = async (event) => {
+      try {
+        const res = await axios.get(`${base_url}/api/user/logout`);
+        navigate("/");
+        // location.reload(true);
+      } catch (error) {
+        console.log(error);
+      }
+    };
   
     const handleMenuClick = (e) => {
       // Handling navigation based on key
@@ -106,7 +116,7 @@ import "./Projects.css";
             navigate('/account-user');
             break;
         case '10':
-            navigate('/log out');
+          handleLogout();
             break;
         default:
           console.log('Menu item:', e.key);

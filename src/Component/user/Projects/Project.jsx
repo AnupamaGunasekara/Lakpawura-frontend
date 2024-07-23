@@ -101,6 +101,16 @@ const Project = () => {
     setCollapsed(!collapsed);
   };
 
+  const handleLogout = async (event) => {
+    try {
+      const res = await axios.get(`${base_url}/api/user/logout`);
+      navigate("/");
+      // location.reload(true);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const handleMenuClick = (e) => {
     // Handling navigation based on key
     switch (e.key) {
@@ -117,7 +127,7 @@ const Project = () => {
         navigate('/account');
         break;
       case '10':
-        navigate('/log out');
+        handleLogout();
         break;
       default:
         console.log('Menu item:', e.key);

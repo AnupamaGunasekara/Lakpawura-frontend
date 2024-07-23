@@ -3,7 +3,7 @@ import Button from "react-bootstrap/Button";
 import Spinner from "react-bootstrap/Spinner";
 import { useNavigate } from "react-router-dom";
 import './SignUp.css'
-import  Axios from "axios";
+import  axios from "axios";
 
 
 function AddAdmin() {
@@ -26,7 +26,7 @@ function AddAdmin() {
   });
 
   const navigate = useNavigate();
-   Axios.defaults.withCredentials = true;
+  
 
   //submiting PersonalDetails to backend
   const handleSubmit = async (event) => {
@@ -50,7 +50,7 @@ function AddAdmin() {
 
     try {
       setLoading(true);
-      const res = await Axios.post(`${base_url}/api/admin/register`, values);
+      const res = await axios.post(`${base_url}/api/admin/register`, values);
       console.log(res.data.message);
       if (res.data.Status === "Success") {
         navigate("/projects");

@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { message } from 'antd';
 import './LandingPage.css';
 import logo from '../../assets/logo.png';
-import Axios from "axios";
+import axios from "axios";
 
 const LandingPage = () => {
   const navigate = useNavigate();
@@ -20,7 +20,7 @@ const LandingPage = () => {
 
   const handleUserLogin = async () => {
     try {
-      const res = await Axios.post(`${base_url}/api/user/login`, {
+      const res = await axios.post(`${base_url}/api/user/login`, {
         email: username,
         password: password
       });
@@ -36,7 +36,7 @@ const LandingPage = () => {
 
   const handleAdminLogin = async () => {
     try {
-      const res = await Axios.post(`${base_url}/api/admin/login`, {
+      const res = await axios.post(`${base_url}/api/admin/login`, {
         userName: adminname,
         password: password
       });
@@ -52,7 +52,7 @@ const LandingPage = () => {
 
   const handleCreateAdmin = async () => {
     try {
-      const res = await Axios.post(`${base_url}/api/admin/create`, {
+      const res = await axios.post(`${base_url}/api/admin/create`, {
         email: adminname,
         password: password
       });

@@ -11,6 +11,8 @@ import {
 } from '@ant-design/icons';
 import { Button, Menu } from 'antd';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import axios  from 'axios';
+
 
 const items = [
     {
@@ -67,8 +69,20 @@ export default function AdminAccount() {
   const [collapsed, setCollapsed] = useState(false);
   const navigate = useNavigate(); // Initialize navigate hook
 
+  const base_url = import.meta.env.VITE_APP_BACKEND_URL;
   const toggleCollapsed = () => {
     setCollapsed(!collapsed);
+  };
+
+
+  const handleLogout = async (event) => {
+    try {
+      const res = await axios.get(`${base_url}/api/user/logout`);
+      navigate("/");
+      // location.reload(true);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const handleMenuClick = (e) => {
@@ -88,7 +102,7 @@ export default function AdminAccount() {
         navigate('/account');
         break;
       case '10':
-        navigate('/log out');
+        navigate('/');
         break;
       default:
         console.log('Menu item:', e.key);

@@ -63,7 +63,7 @@ export default function Messages() {
         navigate('/account');
         break;
       case '10':
-        navigate('/log out');
+        handleLogout();
         break;
       default:
         console.log('Menu item:', e.key);
@@ -98,6 +98,16 @@ export default function Messages() {
     } catch (err) {
       console.error(err);
       antdMessage.error("Failed to send message.");
+    }
+  };
+
+  const handleLogout = async (event) => {
+    try {
+      const res = await axios.get(`${base_url}/api/user/logout`);
+      navigate("/");
+      // location.reload(true);
+    } catch (error) {
+      console.log(error);
     }
   };
 

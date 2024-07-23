@@ -1,5 +1,5 @@
 import { FacebookOutlined, GlobalOutlined, InstagramOutlined, PhoneOutlined, TwitterOutlined } from '@ant-design/icons';
-import axios from 'axios'; // Import Axios
+import axios from 'axios'; // Import axios
 import React, { useState } from 'react';
 import { Button, Col, Container, Row } from 'react-bootstrap';
 import {message as antdMessage } from 'antd';

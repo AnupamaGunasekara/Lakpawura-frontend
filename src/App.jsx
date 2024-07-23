@@ -14,9 +14,11 @@ import AdminAccountpage from "./Pages/User Pages/AdminAccountpage.jsx";
 import AdminMessagesPage from "./Pages/User Pages/AdminMessagesPage.jsx";
 import AddFirstAdminPage from "./Pages/User Pages/AddFirstAdminPage.jsx";
 import AddAdminPage from "./Pages/User Pages/AddAdminPage.jsx";
+import axios from "axios";
 
 
 function App() {
+  axios.defaults.withCredentials = true;
   
 
   return (
