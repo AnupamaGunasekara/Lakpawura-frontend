@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import './Header.css';
 import logo from '../../../assets/logo.png'
 
-export default function Header() {
+export default function HeaderAdmin() {
     const navigate = useNavigate();
     return (
         <div>
@@ -14,10 +14,8 @@ export default function Header() {
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="mr-auto">
                         <Nav.Link onClick={() => navigate("/")}>Home</Nav.Link>
-                        <Nav.Link onClick={() => navigate("/about")}>About Us</Nav.Link>
-                        <Nav.Link onClick={() => navigate("/projectsUser")}>Projects</Nav.Link>
-                        <Nav.Link onClick={() => navigate("/contact")}>Contact</Nav.Link>
-                        <Nav.Link onClick={() => navigate("/accountUser")}>My Account</Nav.Link>
+                        <Nav.Link onClick={() => navigate("/projects")}>Projects</Nav.Link>
+                        <Nav.Link onClick={() => navigate("/account")}>My Account</Nav.Link>
                         
                     </Nav>
                     <div className="brand-container">

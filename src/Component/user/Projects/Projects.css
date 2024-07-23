@@ -1,0 +1,118 @@
+body {
+  background-color: #f0f2f5; /* Light gray background */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.container-1 {
+  display: flex;
+  height: 100vh;
+}
+
+.menu-div {
+  height: 100vh;
+  background-color: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.navbar-post {
+  width: 20%;
+}
+
+.container-post {
+  width: 80%;
+  padding: 20px;
+  background-color: white;
+  border-left: 1px solid #e8e8e8;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.create-post-button {
+  width: fit-content;
+  align-self: flex-start;
+  margin-bottom: 20px;
+}
+
+.create-post {
+  width: 100%;
+}
+
+.create-post-modal .ant-modal-content {
+  padding: 20px;
+}
+
+.post-creator {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.post-creator-name {
+  margin-left: 10px;
+  font-weight: 600;
+}
+
+.post-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.create-post-form {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.post {
+  background-color: white;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.post img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  margin-top: 10px;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.container-post {
+  display: flex;
+  flex-direction: column;
+  min-height: 80vh; /* Adjust this based on your layout */
+}
+
+.posts-container {
+  flex: 1;
+}
+
+.pagination-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.black-font {
+  color: black;
+}
+
+.uploaded-image img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  margin-top: 10px;
+}
