@@ -1,9 +1,13 @@
 import {
   CameraOutlined,
+  MailOutlined,
+  MenuFoldOutlined,
+  MenuUnfoldOutlined,
+  PlusOutlined,
+  ProfileOutlined,
   HomeOutlined,
-  PlayCircleOutlined,
-  ShoppingCartOutlined,
   UserOutlined,
+  UploadOutlined
 } from "@ant-design/icons";
 import {
   Avatar,
@@ -21,9 +25,54 @@ import {
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import "./Projects.css";
+import logo from '../../../assets/logo.png'
+import { useNavigate } from "react-router-dom";
 
 const { Option } = Select;
 const base_url = import.meta.env.VITE_APP_BACKEND_URL;
+
+
+const items = [
+  {
+    key: '1',
+    icon: <HomeOutlined />,
+    label: 'Home',
+  },
+  {
+    key: '2',
+    icon: <MailOutlined />,
+    label: 'Messages',
+  },
+  {
+    key: '3',
+    icon: <PlusOutlined />,
+    label: 'Add Administrator',
+  },
+  {
+    key: 'sub1',
+    label: 'Admin Panel',
+    icon: <ProfileOutlined />,
+    children: [
+      {
+        key: '5',
+        label: 'Admin 1',
+      },
+      {
+        key: '6',
+        label: 'Admin 2',
+      },
+      {
+        key: '7',
+        label: 'Admin 3',
+      },
+      {
+        key: '8',
+        label: 'Admin 4',
+      },
+    ],
+  },
+];
+
 
 const Project = () => {
   const [posts, setPosts] = useState([]);
@@ -33,7 +82,32 @@ const Project = () => {
   const [uploadedImage, setUploadedImage] = useState(null);
   const [form] = Form.useForm();
   const [currentPage, setCurrentPage] = useState(1);
-  const pageSize = 10; // Display one post per page
+  const pageSize = 1; // Display one post per page
+
+
+  const [collapsed, setCollapsed] = useState(false);
+  const navigate = useNavigate(); // Initialize navigate hook
+
+  const toggleCollapsed = () => {
+    setCollapsed(!collapsed);
+  };
+
+  const handleMenuClick = (e) => {
+    // Handling navigation based on key
+    switch (e.key) {
+      case '1':
+        navigate('/projects');
+        break;
+      case '2':
+        
+        break;
+      case '3':
+        navigate('/add-admin');
+        break;
+      default:
+        console.log('Menu item:', e.key);
+    }
+  };
 
   useEffect(() => {
     getPosts();
@@ -56,7 +130,7 @@ const Project = () => {
     formData.append("title", values.title);
     formData.append("category", values.category);
     formData.append("discription", values.discription);
-    formData.append("author", "Anupama");
+    formData.append("author", "Lakpawura");
     formData.append("date", new Date());
     formData.append("comments", JSON.stringify([]));
     formData.append("rating", isEditMode ? currentPost.rating : 0);
@@ -177,46 +251,24 @@ const Project = () => {
 
   return (
     <div className="container-1">
-      <div className="navbar-post">
-        <div className="menu-div">
-          <Menu
-            mode="vertical"
-            style={{ height: "100%" }}
-            items={[
-              {
-                key: "search",
-                label: (
-                  <Input.Search
-                    placeholder="Search posts"
-                    onSearch={(value) => console.log(value)}
-                    enterButton
-                  />
-                ),
-              },
-              {
-                key: "home",
-                icon: <HomeOutlined />,
-                label: "Home",
-              },
-              {
-                key: "video",
-                icon: <PlayCircleOutlined />,
-                label: "Watch",
-              },
-              {
-                key: "market",
-                icon: <ShoppingCartOutlined />,
-                label: "Marketplace",
-              },
-              {
-                key: "group",
-                icon: <UserOutlined />,
-                label: "Groups",
-              },
-            ]}
-          />
-        </div>
-      </div>
+      <div style={{ width: 256 }}>
+      <Button
+        type="primary"
+        onClick={toggleCollapsed}
+        style={{ marginBottom: 16 }}
+      >
+        {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+      </Button>
+      <Menu
+        defaultSelectedKeys={['1']}
+        defaultOpenKeys={['sub1']}
+        mode="inline"
+        theme="dark"
+        inlineCollapsed={collapsed}
+        items={items}
+        onClick={handleMenuClick} // Add onClick handler to Menu
+      />
+    </div>
       <div className="container-post">
         <Button
           className="create-post-button"
@@ -239,9 +291,9 @@ const Project = () => {
             onFinish={handleFinish}
           >
             <div className="post-creator">
-              <Avatar size="large" icon={<UserOutlined />} />
+              <Avatar src={logo} style={{width:"60px", height:"55px", padding:"10px"}} />
               <span className="post-creator-name">
-                What's on your mind, Anupama?
+                What's on your mind, Lakpawura?
               </span>
             </div>
             <Form.Item
@@ -264,7 +316,7 @@ const Project = () => {
                 <Option value="category5">Category 5</Option>
               </Select>
             </Form.Item>
-            <Form.Item name="discription">
+            <Form.Item name="discription"  label="Discription">
               <Input.TextArea rows={5} placeholder="Write something..." />
             </Form.Item>
             {uploadedImage && (
@@ -279,7 +331,7 @@ const Project = () => {
                 onChange={handleUpload}
                 showUploadList={false} // Hide the default file list
               >
-                <Button icon={<CameraOutlined />} />
+                <Button icon={<UploadOutlined />} />
               </Upload>
             </div>
             <Button type="primary" htmlType="submit">
@@ -291,8 +343,8 @@ const Project = () => {
           {paginatedPosts.map((post) => (
             <div key={post.id} className="post black-font">
               <div style={{ display: "flex", alignItems: "center" }}>
-                <Avatar size="medium" icon={<UserOutlined />} />
-                <div style={{ paddingLeft: "5px" }}>
+                <Avatar src={logo} style={{width:"60px", height:"55px", padding:"10px"}} />
+                <div style={{ paddingLeft: "15px", paddingTop:"20px" }}>
                   <div>{post.author}</div>
                   <div>
                     <p
@@ -306,6 +358,9 @@ const Project = () => {
                     </p>
                   </div>
                 </div>
+                <Button type="primary" onClick={() => handleEdit(post)} style={{marginLeft:"10px"}}>
+                Edit Post
+              </Button>
               </div>
               <h3>{post.title}</h3>
               <h6 style={{ color: "gray" }}>
@@ -313,6 +368,7 @@ const Project = () => {
                   post.category.replace("category", "Category ")}
               </h6>
               <p>{post.discription}</p>
+
               {post.images && post.images.length > 0 && (
                 <div className="uploaded-image">
                   <img
@@ -323,6 +379,7 @@ const Project = () => {
                 </div>
               )}
               <Rate
+                style={{padding:"25px"}}
                 onChange={(value) => {
                   const updatedPosts = posts.map((p) =>
                     p.id === post.id ? { ...p, rating: value } : p
@@ -331,21 +388,22 @@ const Project = () => {
                 }}
                 value={post.rating}
               />
-              <Button type="link" onClick={() => handleEdit(post)}>
-                Edit Post
-              </Button>
+
+            <div className="pagination-container">
+                      <Pagination
+                        current={currentPage}
+                        pageSize={pageSize}
+                        total={posts.length}
+                        onChange={handlePageChange}
+                        className="pagination"
+                        style={{color:"#c19a6b"}}
+                      />
+              </div>
+              
             </div>
           ))}
         </div>
-        <div className="pagination-container">
-          <Pagination
-            current={currentPage}
-            pageSize={pageSize}
-            total={posts.length}
-            onChange={handlePageChange}
-            className="pagination"
-          />
-        </div>
+        
       </div>
     </div>
   );

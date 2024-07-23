@@ -2,25 +2,24 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import React, { useState } from 'react';
 import { Button, Form, Modal, Nav, Navbar } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
+import { message } from 'antd';
 import './LandingPage.css';
 import logo from '../../assets/logo.png';
-import  Axios from "axios";
-
+import Axios from "axios";
 
 const LandingPage = () => {
   const navigate = useNavigate();
   const [showUserLogin, setShowUserLogin] = useState(false);
   const [showAdminLogin, setShowAdminLogin] = useState(false);
+  const [showCreateAdmin, setShowCreateAdmin] = useState(false);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [adminId, setAdminId] = useState('');
   const [adminname, setAdminname] = useState('');
   const [loginError, setLoginError] = useState(false);
   const base_url = import.meta.env.VITE_APP_BACKEND_URL;
 
-  const handleUserLogin = async() => {
+  const handleUserLogin = async () => {
     try {
-
       const res = await Axios.post(`${base_url}/api/user/login`, {
         email: username,
         password: password
@@ -28,7 +27,6 @@ const LandingPage = () => {
       if (res.data.Status === "Success") {
         navigate("/projectsUser");
       } else {
-        
         alert("Login Failed!");
       }
     } catch (error) {
@@ -37,11 +35,28 @@ const LandingPage = () => {
   };
 
   const handleAdminLogin = () => {
-    if (adminname === "example@example.com" && adminId === "admin123" && password === "adminpass") {
+    if (adminname === "example@example.com" && password === "adminpass") {
       navigate("/projects");
     } else {
       setLoginError(true);
       alert("Admin ID or password incorrect.");
+    }
+  };
+
+  const handleCreateAdmin = async () => {
+    try {
+      const res = await Axios.post(`${base_url}/api/admin/create`, {
+        email: adminname,
+        password: password
+      });
+      if (res.data.Status === "Success") {
+        message.success("Admin account created successfully!");
+        setShowCreateAdmin(false);
+      } else {
+        message.error("Failed to create admin account!");
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -107,7 +122,7 @@ const LandingPage = () => {
                 Not registered? <span className="signup-link" onClick={() => navigate("/signup")}>Sign up here</span>
               </p>
               <p>
-                <Button variant="link" onClick={() => navigate("/forgot-password")}>Forgot password?</Button>
+                <Button variant="link" style={{color:"#c19a6b"}} onClick={() => navigate("/forgot-password")}>Forgot password?</Button>
               </p>
             </div>
           </Form>
@@ -122,10 +137,8 @@ const LandingPage = () => {
         <Modal.Body>
           <Form>
             <Form.Group controlId="formAdminId">
-            <Form.Label>Email address</Form.Label>
-            <Form.Control type="email" placeholder="Enter email" value={adminname} onChange={e => setAdminname(e.target.value)} />
-              <Form.Label>Admin ID</Form.Label>
-              <Form.Control type="text" placeholder="Enter Admin ID" value={adminId} onChange={e => setAdminId(e.target.value)} />
+              <Form.Label>Email address</Form.Label>
+              <Form.Control type="email" placeholder="Enter email" value={adminname} onChange={e => setAdminname(e.target.value)} />
             </Form.Group>
             <Form.Group controlId="formAdminPassword">
               <Form.Label>Password</Form.Label>
@@ -134,6 +147,36 @@ const LandingPage = () => {
             <div className="text-center">
               <Button variant="dark" onClick={handleAdminLogin}>
                 Login
+              </Button>
+              <p>
+                <Button variant="link" style={{color:"white"}} onClick={() => navigate("/forgot-password-admin")}>Forgot password?</Button>
+              </p>
+              <p>
+                <Button variant="link" style={{color:"#c19a6b"}} onClick={() => setShowCreateAdmin(true)}>Create First Admin</Button>
+              </p>
+            </div>
+          </Form>
+        </Modal.Body>
+      </Modal>
+
+      {/* Modal for Creating First Admin */}
+      <Modal show={showCreateAdmin} onHide={() => setShowCreateAdmin(false)} centered>
+        <Modal.Header closeButton>
+          <Modal.Title>Create Admin</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form>
+            <Form.Group controlId="formCreateAdminEmail">
+              <Form.Label>Email address</Form.Label>
+              <Form.Control type="email" placeholder="Enter email" value={adminname} onChange={e => setAdminname(e.target.value)} />
+            </Form.Group>
+            <Form.Group controlId="formCreateAdminPassword">
+              <Form.Label>Password</Form.Label>
+              <Form.Control type="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)} />
+            </Form.Group>
+            <div className="text-center">
+              <Button variant="dark" onClick={handleCreateAdmin}>
+                Create Admin
               </Button>
             </div>
           </Form>
