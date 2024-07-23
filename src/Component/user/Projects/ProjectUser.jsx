@@ -1,28 +1,29 @@
 import {
-    CameraOutlined,
+    HomeOutlined,
     MailOutlined,
     MenuFoldOutlined,
     MenuUnfoldOutlined,
     PlusOutlined,
     ProfileOutlined,
-    HomeOutlined,
-    UserOutlined,
-  } from "@ant-design/icons";
-  import {
+    MessageOutlined,
+    UnorderedListOutlined,
+    SettingOutlined,
+    LogoutOutlined
+} from "@ant-design/icons";
+import {
     Avatar,
     Button,
     Menu,
     message,
-    Modal,
     Pagination,
     Rate,
-    Select,
-  } from "antd";
-  import axios from "axios";
-  import React, { useEffect, useState } from "react";
-  import "./Projects.css";
-  import logo from '../../../assets/logo.png';
-  import { useNavigate } from "react-router-dom";
+    Select
+} from "antd";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import logo from '../../../assets/logo.png';
+import "./Projects.css";
   
   const { Option } = Select;
   const base_url = import.meta.env.VITE_APP_BACKEND_URL;
@@ -35,8 +36,8 @@ import {
     },
     {
       key: '2',
-      icon: <MailOutlined />,
-      label: 'Messages',
+      icon: <MessageOutlined />,
+      label: 'Contact Lakpawura',
     },
     {
       key: '3',
@@ -45,8 +46,8 @@ import {
     },
     {
       key: 'sub1',
-      label: 'Admin Panel',
-      icon: <ProfileOutlined />,
+      label: 'Catogeries',
+      icon: <UnorderedListOutlined />,
       children: [
         {
           key: '5',
@@ -66,6 +67,16 @@ import {
         },
       ],
     },
+    {
+        key: '9',
+        icon: <SettingOutlined />,
+        label: 'Account Settings',
+      },
+      {
+        key: '10',
+        icon: <LogoutOutlined />,
+        label: 'Logout',
+      },
   ];
   
   const Project = () => {
@@ -86,11 +97,17 @@ import {
           navigate('/projectsUser');
           break;
         case '2':
-          navigate('/'); // Navigate to messages page
+          navigate('/contact'); // Navigate to messages page
           break;
         case '3':
           navigate('/addadmin');
           break;
+        case '9':
+            navigate('/account-user');
+            break;
+        case '10':
+            navigate('/log out');
+            break;
         default:
           console.log('Menu item:', e.key);
       }
@@ -183,7 +200,7 @@ import {
                     <div>
                       <p
                         style={{
-                          fontSize: "10px",
+                          fontSize: "15px",
                           color: "gray",
                           display: "block",
                         }}

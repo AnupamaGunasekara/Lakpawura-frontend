@@ -5,50 +5,62 @@ import {
   MenuUnfoldOutlined,
   PlusOutlined,
   ProfileOutlined,
-  SettingOutlined
+  SettingOutlined,
+  HomeOutlined,
+  LogoutOutlined
 } from '@ant-design/icons';
 import { Button, Menu } from 'antd';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate
 
 const items = [
-  {
-    key: '1',
-    icon: <SettingOutlined />,
-    label: 'Account Settings',
-  },
-  {
-    key: '2',
-    icon: <MailOutlined />,
-    label: 'Messages',
-  },
-  {
-    key: '3',
-    icon: <PlusOutlined />,
-    label: 'Add Administrator',
-  },
-  {
-    key: 'sub1',
-    label: 'Admin Panel',
-    icon: <ProfileOutlined />,
-    children: [
-      {
-        key: '5',
-        label: 'Admin 1',
+    {
+        key: '1',
+        icon: <HomeOutlined />,
+        label: 'Projects',
       },
       {
-        key: '6',
-        label: 'Admin 2',
+        key: '2',
+        icon: <MailOutlined />,
+        label: 'Messages',
       },
       {
-        key: '7',
-        label: 'Admin 3',
+        key: '3',
+        icon: <PlusOutlined />,
+        label: 'Add Administrator',
       },
       {
-        key: '8',
-        label: 'Admin 4',
+        key: 'sub1',
+        label: 'Admin Panel',
+        icon: <ProfileOutlined />,
+        children: [
+          {
+            key: '5',
+            label: 'Admin 1',
+          },
+          {
+            key: '6',
+            label: 'Admin 2',
+          },
+          {
+            key: '7',
+            label: 'Admin 3',
+          },
+          {
+            key: '8',
+            label: 'Admin 4',
+          },
+        ],
       },
-    ],
-  },
+      {
+        key: '9',
+        icon: <SettingOutlined />,
+        label: 'Account Settings',
+      },
+      {
+        key: '10',
+        icon: <LogoutOutlined />,
+        label: 'Logout',
+      },
 ];
 
 export default function AdminAccount() {
@@ -64,13 +76,19 @@ export default function AdminAccount() {
     console.log(e)
     switch (e.key) {
       case '1':
-        navigate('/account');
+        navigate('/projects');
         break;
       case '2':
-        navigate('/messages'); // Navigate to messages page
+        navigate('/messages');
         break;
       case '3':
         navigate('/addadmin');
+        break;
+      case '9':
+        navigate('/account');
+        break;
+      case '10':
+        navigate('/log out');
         break;
       default:
         console.log('Menu item:', e.key);
