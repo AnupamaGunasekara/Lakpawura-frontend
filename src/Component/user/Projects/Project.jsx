@@ -236,16 +236,26 @@ const Project = () => {
             const updatedPosts = posts.filter((p) => p.id !== post.id);
             setPosts(updatedPosts);
             message.success("Post deleted successfully!");
+            setTimeout(() => {
+              window.location.reload();
+            }, 1500);
           } else {
             message.error("Failed to delete the post!");
+            setTimeout(() => {
+              window.location.reload();
+            }, 1500);
           }
         } catch (error) {
           console.error("Error deleting post:", error);
           message.error("Failed to delete the post!");
+          setTimeout(() => {
+            window.location.reload();
+          }, 1500);
         }
       },
     });
   };
+  
 
   const getPosts = async () => {
     try {
@@ -391,16 +401,16 @@ const Project = () => {
               <div style={{ display: "flex", alignItems: "center" }}>
                 <Avatar src={logo} style={{ width: "60px", height: "55px", padding: "10px" }} />
                 <div style={{ paddingLeft: "15px", paddingTop: "20px" }}>
-                  <div>{post.author}</div>
+                  <div style={{color: "white"}}>{post.author}</div>
                   <div>
                     <p
                       style={{
-                        fontSize: "15px",
-                        color: "gray",
+                        fontSize: "12px",
+                        color: "wheat",
                         display: "block",
                       }}
                     >
-                      {formatDate(post.updatedAt)}
+                      {formatDate(post.createdAt)}
                     </p>
                   </div>
                 </div>
@@ -412,12 +422,11 @@ const Project = () => {
                 </Button>
               </div>
               <h3>{post.title}</h3>
-              <h6 style={{ color: "gray" }}>
+              <h6 style={{ color:"wheat"}}>
                 {post.category &&
                   post.category.replace("category", "Category ")}
               </h6>
-              <p>{post.discription}</p>
-
+              <p style={{ color:"white"}}>{post.discription}</p>
               {post.images && post.images.length > 0 && (
                 <div className="uploaded-image">
                   <img

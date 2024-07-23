@@ -1,10 +1,7 @@
 import {
     HomeOutlined,
-    MailOutlined,
     MenuFoldOutlined,
     MenuUnfoldOutlined,
-    PlusOutlined,
-    ProfileOutlined,
     MessageOutlined,
     UnorderedListOutlined,
     SettingOutlined,
@@ -38,11 +35,6 @@ import "./Projects.css";
       key: '2',
       icon: <MessageOutlined />,
       label: 'Contact Lakpawura',
-    },
-    {
-      key: '3',
-      icon: <PlusOutlined />,
-      label: 'Add Administrator',
     },
     {
       key: 'sub1',
@@ -108,9 +100,6 @@ import "./Projects.css";
           break;
         case '2':
           navigate('/contact'); // Navigate to messages page
-          break;
-        case '3':
-          navigate('/addadmin');
           break;
         case '9':
             navigate('/account-user');
@@ -206,36 +195,35 @@ import "./Projects.css";
                 <div style={{ display: "flex", alignItems: "center" }}>
                   <Avatar src={logo} style={{width:"60px", height:"55px", padding:"10px"}} />
                   <div style={{ paddingLeft: "15px", paddingTop:"20px" }}>
-                    <div>{post.author}</div>
-                    <div>
-                      <p
-                        style={{
-                          fontSize: "15px",
-                          color: "gray",
-                          display: "block",
-                        }}
-                      >
-                        {formatDate(post.updatedAt)}
-                      </p>
-                    </div>
+                  <div style={{color: "white"}}>{post.author}</div>
+                  <div>
+                    <p
+                      style={{
+                        fontSize: "12px",
+                        color: "wheat",
+                        display: "block",
+                      }}
+                    >
+                      {formatDate(post.createdAt)}
+                    </p>
+                  </div>
                   </div>
                 </div>
                 <h3>{post.title}</h3>
-                <h6 style={{ color: "gray" }}>
-                  {post.category &&
-                    post.category.replace("category", "Category ")}
-                </h6>
-                <p>{post.discription}</p>
-  
-                {post.images && post.images.length > 0 && (
-                  <div className="uploaded-image">
-                    <img
-                      src={post.images[0].path}
-                      alt="Post"
-                      style={{ maxWidth: "100%" }}
-                    />
-                  </div>
-                )}
+                  <h6 style={{ color:"wheat"}}>
+                    {post.category &&
+                      post.category.replace("category", "Category ")}
+                  </h6>
+                  <p style={{ color:"white"}}>{post.discription}</p>
+                  {post.images && post.images.length > 0 && (
+                    <div className="uploaded-image">
+                      <img
+                        src={post.images[0].path}
+                        alt="Post"
+                        style={{ maxWidth: "100%" }}
+                      />
+                    </div>
+                  )}
                 <Rate
                   style={{padding:"25px"}}
                   onChange={(value) => {

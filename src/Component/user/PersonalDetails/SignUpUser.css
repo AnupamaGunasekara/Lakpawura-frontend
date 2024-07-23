@@ -6,14 +6,6 @@ body {
     font-family: Arial, sans-serif;
 }
 
-.form-groups {
-    margin-top: 500px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-}
-
 form {
     background-color: rgba(0, 0, 0, 0.8); /* Slightly lighter dark background */
     padding: 20px;
@@ -21,6 +13,10 @@ form {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.8);
     max-width: 500px;
     width: 100%;
+}
+
+.form-groups{
+    margin-top: 600px;
 }
 
 h2 {
