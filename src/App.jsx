@@ -12,6 +12,8 @@ import "./index.css";
 import UserProjectsPage from "./Pages/User Pages/UserProjectsPage.jsx";
 import AdminAccountpage from "./Pages/User Pages/AdminAccountpage.jsx";
 import AdminMessagesPage from "./Pages/User Pages/AdminMessagesPage.jsx";
+import AddFirstAdminPage from "./Pages/User Pages/AddFirstAdminPage.jsx";
+import AddAdminPage from "./Pages/User Pages/AddAdminPage.jsx";
 
 
 function App() {
@@ -28,6 +30,8 @@ function App() {
       <Route path="/projectsUser" element={<UserProjectsPage/>}></Route>
       <Route path="/account" element={<AdminAccountpage/>}></Route>
       <Route path="/messages" element={<AdminMessagesPage/>}></Route>
+      <Route path="/addfirstadmin" element={<AddFirstAdminPage/>}></Route>
+      <Route path="/addadmin" element={<AddAdminPage/>}></Route>
 
 
         

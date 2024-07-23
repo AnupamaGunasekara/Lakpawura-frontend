@@ -34,12 +34,19 @@ const LandingPage = () => {
     }
   };
 
-  const handleAdminLogin = () => {
-    if (adminname === "example@example.com" && password === "adminpass") {
-      navigate("/projects");
-    } else {
-      setLoginError(true);
-      alert("Admin ID or password incorrect.");
+  const handleAdminLogin = async () => {
+    try {
+      const res = await Axios.post(`${base_url}/api/admin/login`, {
+        userName: adminname,
+        password: password
+      });
+      if (res.data.Status === "Success") {
+        navigate("/projects");
+      } else {
+        alert("Login Failed!");
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -152,7 +159,7 @@ const LandingPage = () => {
                 <Button variant="link" style={{color:"white"}} onClick={() => navigate("/forgot-password-admin")}>Forgot password?</Button>
               </p>
               <p>
-                <Button variant="link" style={{color:"#c19a6b"}} onClick={() => setShowCreateAdmin(true)}>Create First Admin</Button>
+                <Button variant="link" style={{color:"#c19a6b"}} onClick={() => navigate("/addfirstadmin")}>Create First Admin</Button>
               </p>
             </div>
           </Form>

@@ -89,7 +89,7 @@ import {
           navigate('/'); // Navigate to messages page
           break;
         case '3':
-          navigate('/add-admin');
+          navigate('/addadmin');
           break;
         default:
           console.log('Menu item:', e.key);

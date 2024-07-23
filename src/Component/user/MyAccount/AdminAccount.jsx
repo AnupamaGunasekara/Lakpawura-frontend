@@ -61,6 +61,7 @@ export default function AdminAccount() {
 
   const handleMenuClick = (e) => {
     // Handling navigation based on key
+    console.log(e)
     switch (e.key) {
       case '1':
         navigate('/account');
@@ -69,7 +70,7 @@ export default function AdminAccount() {
         navigate('/messages'); // Navigate to messages page
         break;
       case '3':
-        navigate('/add-admin');
+        navigate('/addadmin');
         break;
       default:
         console.log('Menu item:', e.key);
