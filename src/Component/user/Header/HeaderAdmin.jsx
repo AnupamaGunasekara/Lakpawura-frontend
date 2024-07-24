@@ -4,9 +4,25 @@ import { Nav, Navbar } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import './Header.css';
 import logo from '../../../assets/logo.png'
+import Cookies from "js-cookie";
+import { jwtDecode } from "jwt-decode";
+import { useState,useEffect } from 'react';
 
 export default function HeaderAdmin() {
     const navigate = useNavigate();
+    const base_url = import.meta.env.VITE_APP_BACKEND_URL;
+    const cookieValue = Cookies.get('token');
+
+    useEffect(() => {
+        if (cookieValue) {
+            const decodedToken = jwtDecode(cookieValue);
+            const userId = decodedToken.id;
+            const name = decodedToken.name;
+            console.log(userId, name);
+        } else {
+            console.log("No token found");
+        }
+    }, [cookieValue]);
     return (
         <div>
             <Navbar className="navigation-bar" expand="lg">

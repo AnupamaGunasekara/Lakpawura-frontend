@@ -21,6 +21,8 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import logo from '../../../assets/logo.png';
 import "./Projects.css";
+import Cookies from "js-cookie";
+import { jwtDecode } from "jwt-decode";
   
   const { Option } = Select;
   const base_url = import.meta.env.VITE_APP_BACKEND_URL;
@@ -77,6 +79,20 @@ import "./Projects.css";
     const pageSize = 1; // Display one post per page
     const [collapsed, setCollapsed] = useState(false);
     const navigate = useNavigate(); // Initialize navigate hook
+
+    const base_url = import.meta.env.VITE_APP_BACKEND_URL;
+    const cookieValue = Cookies.get('token');
+
+    useEffect(() => {
+        if (cookieValue) {
+            const decodedToken = jwtDecode(cookieValue);
+            const userId = decodedToken.id;
+            const name = decodedToken.name;
+            console.log(userId, name);
+        } else {
+            console.log("No token found");
+        }
+    }, [cookieValue]);
   
     const toggleCollapsed = () => {
       setCollapsed(!collapsed);
