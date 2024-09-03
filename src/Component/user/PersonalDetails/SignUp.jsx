@@ -2,9 +2,8 @@ import React, { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Spinner from "react-bootstrap/Spinner";
 import { useNavigate } from "react-router-dom";
-import './SignUp.css'
-import  Axios from "axios";
-
+import './SignUpUser.css'
+import axios from "axios";
 
 function SignUp() {
   const base_url = import.meta.env.VITE_APP_BACKEND_URL;
@@ -15,7 +14,7 @@ function SignUp() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [Password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
-  const [values, setvalues] = useState({
+  const [values, setValues] = useState({
     email: "",
     password: "",
     name: "",
@@ -29,16 +28,15 @@ function SignUp() {
   });
 
   const navigate = useNavigate();
-   Axios.defaults.withCredentials = true;
 
-  //submiting PersonalDetails to backend
+  //submitting PersonalDetails to backend
   const handleSubmit = async (event) => {
     event.preventDefault();
-    if (Password == "") {
+    if (Password === "") {
       setWarning("Enter password!");
       return;
     }
-    if (confirmPassword == "") {
+    if (confirmPassword === "") {
       setWarning("Confirm password!");
       return;
     }
@@ -47,17 +45,17 @@ function SignUp() {
       setWarning("Passwords do not match!");
       setPassword("");
       setConfirmPassword("");
-      setvalues({ ...values, password: "" });
+      setValues({ ...values, password: "" });
       return;
     }
 
     try {
       setLoading(true);
-      const res = await Axios.post(`${base_url}/api/user/register`, values);
+      const res = await axios.post(`${base_url}/api/user/register`, values);
       console.log(res.data.message);
       if (res.data.Status === "Success") {
         navigate("/projectsUser");
-      } else if (res.data.message == "already registered email") {
+      } else if (res.data.message === "already registered email") {
         alert("Email is already registered! Please Enter another one");
         setLoading(false);
       } else {
@@ -70,10 +68,9 @@ function SignUp() {
     }
   };
 
-
   return (
     <div className="form-groups">
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} style={{marginTop:"400px"}}>
         <h2>Personal Details</h2>
 
         <div className="form-group">
@@ -86,7 +83,7 @@ function SignUp() {
               id="email"
               placeholder=""
               onChange={(e) => {
-                setvalues({ ...values, email: e.target.value });
+                setValues({ ...values, email: e.target.value });
               }}
             />
           </div>
@@ -102,7 +99,7 @@ function SignUp() {
               id="name"
               placeholder=""
               onChange={(e) => {
-                setvalues({ ...values, name: e.target.value });
+                setValues({ ...values, name: e.target.value });
               }}
             />
           </div>
@@ -117,7 +114,7 @@ function SignUp() {
               id="address"
               placeholder=""
               onChange={(e) => {
-                setvalues({ ...values, address: e.target.value });
+                setValues({ ...values, address: e.target.value });
               }}
             />
           </div>
@@ -125,7 +122,7 @@ function SignUp() {
         <br></br>
         <label className="lables">Contact Numbers</label>
         <br></br>
-        <div className="form-group contact">
+        <div className="form-group contact-1">
           <label className="lables">Mobile</label>
           <div className="custom_input">
             <input
@@ -134,13 +131,13 @@ function SignUp() {
               id="mobileno"
               placeholder=""
               onChange={(e) => {
-                setvalues({ ...values, mobileno: e.target.value });
+                setValues({ ...values, mobileno: e.target.value });
               }}
             />
           </div>
         </div>
 
-        <div className="form-group contact">
+        <div className="form-group contact-1">
           <label className="lables">Office </label>
           <div className="custom_input">
             <input
@@ -149,13 +146,13 @@ function SignUp() {
               id="officeno"
               placeholder=""
               onChange={(e) => {
-                setvalues({ ...values, officeno: e.target.value });
+                setValues({ ...values, officeno: e.target.value });
               }}
             />
           </div>
         </div>
 
-        <div className="form-group contact">
+        <div className="form-group contact-1">
           <label className="lables">Home</label>
           <div className="custom_input">
             <input
@@ -164,7 +161,7 @@ function SignUp() {
               id="homeno"
               placeholder=""
               onChange={(e) => {
-                setvalues({ ...values, homeno: e.target.value });
+                setValues({ ...values, homeno: e.target.value });
               }}
             />
           </div>
@@ -179,14 +176,14 @@ function SignUp() {
               id="birthday"
               placeholder=""
               onChange={(e) => {
-                setvalues({ ...values, birthday: e.target.value });
+                setValues({ ...values, birthday: e.target.value });
               }}
             />
           </div>
         </div>
 
         <div className="form-group">
-          <label className="lables"> New Password</label>
+          <label className="lables">New Password</label>
           <div className="custom_input">
             <input
               className="details-input form-control"
@@ -195,7 +192,7 @@ function SignUp() {
               value={Password}
               onChange={(e) => {
                 setPassword(e.target.value);
-                setvalues({ ...values, password: e.target.value });
+                setValues({ ...values, password: e.target.value });
               }}
             />
           </div>
@@ -229,7 +226,7 @@ function SignUp() {
             value="friend"
             className=" form-check-input"
             onChange={(e) =>
-              setvalues({ ...values, lakpawuraSource: e.target.value })
+              setValues({ ...values, lakpawuraSource: e.target.value })
             }
           />
           <label className="form-check-label lables">
@@ -245,7 +242,7 @@ function SignUp() {
             value="family"
             className="form-check-input"
             onChange={(e) =>
-              setvalues({ ...values, lakpawuraSource: e.target.value })
+              setValues({ ...values, lakpawuraSource: e.target.value })
             }
           />
           <label className="form-check-label lables">
@@ -261,7 +258,7 @@ function SignUp() {
             value="company"
             className="form-check-input"
             onChange={(e) =>
-              setvalues({ ...values, lakpawuraSource: e.target.value })
+              setValues({ ...values, lakpawuraSource: e.target.value })
             }
           />
           <label className="form-check-label lables">
@@ -277,7 +274,7 @@ function SignUp() {
             value="socialmedia"
             className="form-check-input"
             onChange={(e) =>
-              setvalues({ ...values, lakpawuraSource: e.target.value })
+              setValues({ ...values, lakpawuraSource: e.target.value })
             }
           />
           <label className="form-check-label lables">Social Media</label>
@@ -291,7 +288,7 @@ function SignUp() {
             value="dprWebsite"
             className="form-check-input"
             onChange={(e) =>
-              setvalues({ ...values, lakpawuraSource: e.target.value })
+              setValues({ ...values, lakpawuraSource: e.target.value })
             }
           />
           <label className="form-check-label lables">Lakpawura Website</label>
@@ -304,7 +301,7 @@ function SignUp() {
             name="lakpawuraSource"
             className="form-check-input"
             onChange={(e) =>
-              setvalues({ ...values, lakpawuraSource: e.target.value })
+              setValues({ ...values, lakpawuraSource: e.target.value })
             }
           />
           <label className="form-check-label lables">Other</label>
@@ -321,7 +318,7 @@ function SignUp() {
             value="yes"
             className="form-check-input"
             onChange={(e) =>
-              setvalues({ ...values, agreeToConditions: e.target.value })
+              setValues({ ...values, agreeToConditions: e.target.value })
             }
           />
           <label className="form-check-label lables">Yes</label>
@@ -335,7 +332,7 @@ function SignUp() {
             value="no"
             className="form-check-input"
             onChange={(e) =>
-              setvalues({ ...values, agreeToConditions: e.target.value })
+              setValues({ ...values, agreeToConditions: e.target.value })
             }
           />
           <label className="form-check-label lables">No</label>
@@ -345,7 +342,7 @@ function SignUp() {
           <Button
             type="submit"
             className="signup-Button button-color"
-            disabled={loading}
+            disabled={loading || values.agreeToConditions !== "yes"}
           >
             {loading ? (
               <>

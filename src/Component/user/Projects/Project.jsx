@@ -1,9 +1,15 @@
 import {
   CameraOutlined,
+  MailOutlined,
+  MenuFoldOutlined,
+  MenuUnfoldOutlined,
+  PlusOutlined,
+  ProfileOutlined,
   HomeOutlined,
-  PlayCircleOutlined,
-  ShoppingCartOutlined,
   UserOutlined,
+  UploadOutlined,
+  SettingOutlined,
+  LogoutOutlined
 } from "@ant-design/icons";
 import {
   Avatar,
@@ -21,9 +27,62 @@ import {
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import "./Projects.css";
+import logo from '../../../assets/logo.png';
+import { useNavigate } from "react-router-dom";
 
 const { Option } = Select;
 const base_url = import.meta.env.VITE_APP_BACKEND_URL;
+
+const items = [
+  {
+    key: '1',
+    icon: <HomeOutlined />,
+    label: 'Projects',
+  },
+  {
+    key: '2',
+    icon: <MailOutlined />,
+    label: 'Messages',
+  },
+  {
+    key: '3',
+    icon: <PlusOutlined />,
+    label: 'Add Administrator',
+  },
+  {
+    key: 'sub1',
+    label: 'Admin Panel',
+    icon: <ProfileOutlined />,
+    children: [
+      {
+        key: '5',
+        label: 'Admin 1',
+      },
+      {
+        key: '6',
+        label: 'Admin 2',
+      },
+      {
+        key: '7',
+        label: 'Admin 3',
+      },
+      {
+        key: '8',
+        label: 'Admin 4',
+      },
+    ],
+  },
+  {
+    key: '9',
+    icon: <SettingOutlined />,
+    label: 'Account Settings',
+  },
+  {
+    key: '10',
+    icon: <LogoutOutlined />,
+    label: 'Logout',
+  },
+];
 
 const Project = () => {
   const [posts, setPosts] = useState([]);
@@ -33,7 +92,47 @@ const Project = () => {
   const [uploadedImage, setUploadedImage] = useState(null);
   const [form] = Form.useForm();
   const [currentPage, setCurrentPage] = useState(1);
-  const pageSize = 10; // Display one post per page
+  const pageSize = 1; // Display one post per page
+
+  const [collapsed, setCollapsed] = useState(false);
+  const navigate = useNavigate(); // Initialize navigate hook
+
+  const toggleCollapsed = () => {
+    setCollapsed(!collapsed);
+  };
+
+  const handleLogout = async (event) => {
+    try {
+      const res = await axios.get(`${base_url}/api/user/logout`);
+      navigate("/");
+      // location.reload(true);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleMenuClick = (e) => {
+    // Handling navigation based on key
+    switch (e.key) {
+      case '1':
+        navigate('/projects');
+        break;
+      case '2':
+        navigate('/messages');
+        break;
+      case '3':
+        navigate('/addadmin');
+        break;
+      case '9':
+        navigate('/account');
+        break;
+      case '10':
+        handleLogout();
+        break;
+      default:
+        console.log('Menu item:', e.key);
+    }
+  };
 
   useEffect(() => {
     getPosts();
@@ -56,7 +155,7 @@ const Project = () => {
     formData.append("title", values.title);
     formData.append("category", values.category);
     formData.append("discription", values.discription);
-    formData.append("author", "Anupama");
+    formData.append("author", "Lakpawura");
     formData.append("date", new Date());
     formData.append("comments", JSON.stringify([]));
     formData.append("rating", isEditMode ? currentPost.rating : 0);
@@ -127,6 +226,37 @@ const Project = () => {
     showModal();
   };
 
+  const handleDelete = async (post) => {
+    Modal.confirm({
+      title: 'Are you sure you want to delete this post?',
+      onOk: async () => {
+        try {
+          const response = await axios.delete(`${base_url}/api/admin/removepost/${post.id}`);
+          if (response.status === 200) {
+            const updatedPosts = posts.filter((p) => p.id !== post.id);
+            setPosts(updatedPosts);
+            message.success("Post deleted successfully!");
+            setTimeout(() => {
+              window.location.reload();
+            }, 1500);
+          } else {
+            message.error("Failed to delete the post!");
+            setTimeout(() => {
+              window.location.reload();
+            }, 1500);
+          }
+        } catch (error) {
+          console.error("Error deleting post:", error);
+          message.error("Failed to delete the post!");
+          setTimeout(() => {
+            window.location.reload();
+          }, 1500);
+        }
+      },
+    });
+  };
+  
+
   const getPosts = async () => {
     try {
       const response = await axios.get(`${base_url}/api/user/getPosts`);
@@ -177,45 +307,23 @@ const Project = () => {
 
   return (
     <div className="container-1">
-      <div className="navbar-post">
-        <div className="menu-div">
-          <Menu
-            mode="vertical"
-            style={{ height: "100%" }}
-            items={[
-              {
-                key: "search",
-                label: (
-                  <Input.Search
-                    placeholder="Search posts"
-                    onSearch={(value) => console.log(value)}
-                    enterButton
-                  />
-                ),
-              },
-              {
-                key: "home",
-                icon: <HomeOutlined />,
-                label: "Home",
-              },
-              {
-                key: "video",
-                icon: <PlayCircleOutlined />,
-                label: "Watch",
-              },
-              {
-                key: "market",
-                icon: <ShoppingCartOutlined />,
-                label: "Marketplace",
-              },
-              {
-                key: "group",
-                icon: <UserOutlined />,
-                label: "Groups",
-              },
-            ]}
-          />
-        </div>
+      <div style={{ width: 256 }}>
+        <Button
+          type="primary"
+          onClick={toggleCollapsed}
+          style={{ marginBottom: 16 }}
+        >
+          {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+        </Button>
+        <Menu
+          defaultSelectedKeys={['1']}
+          defaultOpenKeys={['sub1']}
+          mode="inline"
+          theme="dark"
+          inlineCollapsed={collapsed}
+          items={items}
+          onClick={handleMenuClick} // Add onClick handler to Menu
+        />
       </div>
       <div className="container-post">
         <Button
@@ -239,9 +347,9 @@ const Project = () => {
             onFinish={handleFinish}
           >
             <div className="post-creator">
-              <Avatar size="large" icon={<UserOutlined />} />
+              <Avatar src={logo} style={{ width: "60px", height: "55px", padding: "10px" }} />
               <span className="post-creator-name">
-                What's on your mind, Anupama?
+                What's on your mind, Lakpawura?
               </span>
             </div>
             <Form.Item
@@ -257,14 +365,13 @@ const Project = () => {
               rules={[{ required: true, message: "Please select a category!" }]}
             >
               <Select placeholder="Select a category">
-                <Option value="category1">Category 1</Option>
-                <Option value="category2">Category 2</Option>
-                <Option value="category3">Category 3</Option>
-                <Option value="category4">Category 4</Option>
-                <Option value="category5">Category 5</Option>
+                <Option value="Upcoming">Upcoming</Option>
+                <Option value="Completed">Completed</Option>
+                <Option value="On going">On going</Option>
+                <Option value="Top Rated">Top Rated</Option>
               </Select>
             </Form.Item>
-            <Form.Item name="discription">
+            <Form.Item name="discription" label="Discription">
               <Input.TextArea rows={5} placeholder="Write something..." />
             </Form.Item>
             {uploadedImage && (
@@ -279,7 +386,7 @@ const Project = () => {
                 onChange={handleUpload}
                 showUploadList={false} // Hide the default file list
               >
-                <Button icon={<CameraOutlined />} />
+                <Button icon={<UploadOutlined />} />
               </Upload>
             </div>
             <Button type="primary" htmlType="submit">
@@ -291,28 +398,34 @@ const Project = () => {
           {paginatedPosts.map((post) => (
             <div key={post.id} className="post black-font">
               <div style={{ display: "flex", alignItems: "center" }}>
-                <Avatar size="medium" icon={<UserOutlined />} />
-                <div style={{ paddingLeft: "5px" }}>
-                  <div>{post.author}</div>
+                <Avatar src={logo} style={{ width: "60px", height: "55px", padding: "10px" }} />
+                <div style={{ paddingLeft: "15px", paddingTop: "20px" }}>
+                  <div style={{color: "white"}}>{post.author}</div>
                   <div>
                     <p
                       style={{
-                        fontSize: "10px",
-                        color: "gray",
+                        fontSize: "12px",
+                        color: "wheat",
                         display: "block",
                       }}
                     >
-                      {formatDate(post.updatedAt)}
+                      {formatDate(post.createdAt)}
                     </p>
                   </div>
                 </div>
+                <Button type="primary" onClick={() => handleEdit(post)} style={{ marginLeft: "10px" }}>
+                  Edit Post
+                </Button>
+                <Button type="primary" danger onClick={() => handleDelete(post)} style={{ marginLeft: "10px" }}>
+                  Remove Post
+                </Button>
               </div>
               <h3>{post.title}</h3>
-              <h6 style={{ color: "gray" }}>
+              <h6 style={{ color:"wheat"}}>
                 {post.category &&
                   post.category.replace("category", "Category ")}
               </h6>
-              <p>{post.discription}</p>
+              <p style={{ color:"white"}}>{post.discription}</p>
               {post.images && post.images.length > 0 && (
                 <div className="uploaded-image">
                   <img
@@ -323,6 +436,7 @@ const Project = () => {
                 </div>
               )}
               <Rate
+                style={{ padding: "25px" }}
                 onChange={(value) => {
                   const updatedPosts = posts.map((p) =>
                     p.id === post.id ? { ...p, rating: value } : p
@@ -331,21 +445,22 @@ const Project = () => {
                 }}
                 value={post.rating}
               />
-              <Button type="link" onClick={() => handleEdit(post)}>
-                Edit Post
-              </Button>
+
+              <div className="pagination-container">
+                <Pagination
+                  current={currentPage}
+                  pageSize={pageSize}
+                  total={posts.length}
+                  onChange={handlePageChange}
+                  className="pagination"
+                  style={{ color: "#c19a6b" }}
+                />
+              </div>
+
             </div>
           ))}
         </div>
-        <div className="pagination-container">
-          <Pagination
-            current={currentPage}
-            pageSize={pageSize}
-            total={posts.length}
-            onChange={handlePageChange}
-            className="pagination"
-          />
-        </div>
+
       </div>
     </div>
   );
