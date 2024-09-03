@@ -4,7 +4,7 @@ import { Button, Menu, List, Modal, Input, message as antdMessage } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-export default function Messages() {
+export default function AdminList() {
   const [collapsed, setCollapsed] = useState(false);
   const navigate = useNavigate();
   const [messages, setMessages] = useState([]);
@@ -125,7 +125,8 @@ export default function Messages() {
           {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
         </Button>
         <Menu
-          defaultSelectedKeys={['2']}
+          defaultSelectedKeys={['sub1']}
+          defaultOpenKeys={['sub1']}
           mode="inline"
           theme="dark"
           inlineCollapsed={collapsed}

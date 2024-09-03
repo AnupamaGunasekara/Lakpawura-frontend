@@ -66,7 +66,7 @@ const items = [
       },
 ];
 
-export default function AdminAccount() {
+export default function AddAdminSidemenu() {
   const [collapsed, setCollapsed] = useState(false);
   const navigate = useNavigate(); // Initialize navigate hook
 
@@ -102,8 +102,11 @@ export default function AdminAccount() {
       case '9':
         navigate('/account');
         break;
+      case 'sub1':
+        navigate('/adminList');
+        break;
       case '10':
-        navigate('/');
+        handleLogout();
         break;
       default:
         console.log('Menu item:', e.key);
@@ -120,7 +123,7 @@ export default function AdminAccount() {
         {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
       </Button>
       <Menu
-        defaultSelectedKeys={['1']}
+        defaultSelectedKeys={['3']}
         defaultOpenKeys={['sub1']}
         mode="inline"
         theme="dark"

@@ -365,11 +365,10 @@ const Project = () => {
               rules={[{ required: true, message: "Please select a category!" }]}
             >
               <Select placeholder="Select a category">
-                <Option value="category1">Category 1</Option>
-                <Option value="category2">Category 2</Option>
-                <Option value="category3">Category 3</Option>
-                <Option value="category4">Category 4</Option>
-                <Option value="category5">Category 5</Option>
+                <Option value="Upcoming">Upcoming</Option>
+                <Option value="Completed">Completed</Option>
+                <Option value="On going">On going</Option>
+                <Option value="Top Rated">Top Rated</Option>
               </Select>
             </Form.Item>
             <Form.Item name="discription" label="Discription">
