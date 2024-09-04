@@ -21,6 +21,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import logo from "../../../assets/logo.png";
 import "./Projects.css";
+import Cookies from "js-cookie";
 
 const { Option } = Select;
 const base_url = import.meta.env.VITE_APP_BACKEND_URL;
@@ -79,8 +80,19 @@ const pageSize = 1; // Display one post per page
 const [collapsed, setCollapsed] = useState(false);
 const navigate = useNavigate(); // Initialize navigate hook
 
+
+const cookieValue = Cookies.get("token");
+
 const toggleCollapsed = () => {
   setCollapsed(!collapsed);
+};
+
+const handleSettingNavigate =  () => {
+  if (cookieValue) {
+      navigate('/account');
+  } else {
+    alert("please login");
+  }
 };
 
 const handleLogout = async (event) => {
@@ -115,7 +127,7 @@ const handleMenuClick = (e) => {
       filterPostsByCategory('Top Rated');
       break;
     case '9':
-      navigate('/accountUser');
+      handleSettingNavigate();
       break;
     case '10':
       handleLogout();
