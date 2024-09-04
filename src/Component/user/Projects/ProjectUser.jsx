@@ -21,6 +21,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import logo from '../../../assets/logo.png';
 import "./Projects.css";
+import Cookies from "js-cookie";
 
 const { Option } = Select;
 const base_url = import.meta.env.VITE_APP_BACKEND_URL;
@@ -115,7 +116,7 @@ const handleMenuClick = (e) => {
       filterPostsByCategory('Top Rated');
       break;
     case '9':
-      navigate('/accountUser');
+      handleSettingNavigate();
       break;
     case '10':
       handleLogout();
@@ -188,6 +189,17 @@ const paginatedPosts = filteredPosts.slice(
   (currentPage - 1) * pageSize,
   currentPage * pageSize
 );
+
+const cookieValue = Cookies.get("token");
+
+const handleSettingNavigate =  () => {
+  if (cookieValue) {
+      navigate('/accountuser');
+  } else {
+    message.error("Please login to access account settings!");
+    navigate("/");
+  }
+};
 
 return (
   <div className="container-1">
