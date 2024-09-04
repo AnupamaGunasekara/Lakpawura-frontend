@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { Button, Form, Modal, Nav, Navbar } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { message } from 'antd';
+import { Input, Spin } from 'antd';
 import './LandingPage.css';
 import logo from '../../assets/logo.png';
 import axios from "axios";
@@ -12,10 +13,14 @@ const LandingPage = () => {
   const [showUserLogin, setShowUserLogin] = useState(false);
   const [showAdminLogin, setShowAdminLogin] = useState(false);
   const [showCreateAdmin, setShowCreateAdmin] = useState(false);
+  const [showForgetPassword, setShowForgetPassword] = useState(false);
+  const [showResetPassword, setShowResetPassword] = useState(false);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [adminname, setAdminname] = useState('');
   const [loginError, setLoginError] = useState(false);
+  const [email, setEmail] = useState('');
+  const [loading, setLoading] = useState(false);
   const base_url = import.meta.env.VITE_APP_BACKEND_URL;
 
   const handleUserLogin = async () => {
@@ -64,6 +69,46 @@ const LandingPage = () => {
       }
     } catch (error) {
       console.log(error);
+    }
+  };
+
+  const handleForgetPassword = async (isAdmin) => {
+    setLoading(true);
+    try {
+      const url = isAdmin ? `${base_url}/api/admin/forgot-password` : `${base_url}/api/user/forgot-password`;
+      const res = await axios.post(url, { email });
+      if (res.data.Status === "Success") {
+        message.success("Verification successful, please reset your password.");
+        setShowForgetPassword(false);
+        setShowResetPassword(true);
+      } else {
+        message.error("Failed to verify email.");
+      }
+    } catch (error) {
+      console.log(error);
+      message.error("Something went wrong!");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleResetPassword = async (isAdmin) => {
+    try {
+      const url = isAdmin ? `${base_url}/api/admin/reset-password` : `${base_url}/api/user/reset-password`;
+      const res = await axios.post(url, {
+        email,
+        newPassword: password,
+        confirmPassword: password
+      });
+      if (res.data.Status === "Success") {
+        message.success("Password reset successfully.");
+        setShowResetPassword(false);
+      } else {
+        message.error("Failed to reset password.");
+      }
+    } catch (error) {
+      console.log(error);
+      message.error("Something went wrong!");
     }
   };
 
@@ -129,7 +174,7 @@ const LandingPage = () => {
                 Not registered? <span className="signup-link" onClick={() => navigate("/signup")}>Sign up here</span>
               </p>
               <p>
-                <Button variant="link" style={{color:"#c19a6b"}} onClick={() => navigate("/forgot-password")}>Forgot password?</Button>
+                <Button variant="link" style={{ color: "#c19a6b" }} onClick={() => setShowForgetPassword(true)}>Forgot password?</Button>
               </p>
             </div>
           </Form>
@@ -156,34 +201,53 @@ const LandingPage = () => {
                 Login
               </Button>
               <p>
-                <Button variant="link" style={{color:"white"}} onClick={() => navigate("/forgot-password-admin")}>Forgot password?</Button>
-              </p>
-              <p>
-                <Button variant="link" style={{color:"#c19a6b"}} onClick={() => navigate("/addfirstadmin")}>Create First Admin</Button>
+                <Button variant="link" style={{ color: "#c19a6b" }} onClick={() => setShowForgetPassword(true)}>Forgot password?</Button>
               </p>
             </div>
           </Form>
         </Modal.Body>
       </Modal>
 
-      {/* Modal for Creating First Admin */}
-      <Modal show={showCreateAdmin} onHide={() => setShowCreateAdmin(false)} centered>
+      {/* Modal for Forget Password */}
+      <Modal show={showForgetPassword} onHide={() => setShowForgetPassword(false)} centered>
         <Modal.Header closeButton>
-          <Modal.Title>Create Admin</Modal.Title>
+          <Modal.Title>Forget Password</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Spin spinning={loading}>
+            <Form>
+              <Form.Group controlId="formForgetEmail">
+                <Form.Label>Email address</Form.Label>
+                <Input placeholder="Enter email" value={email} onChange={e => setEmail(e.target.value)} />
+              </Form.Group>
+              <div className="text-center">
+                <Button variant="dark" onClick={() => handleForgetPassword(true)}>
+                  Verify Email
+                </Button>
+              </div>
+            </Form>
+          </Spin>
+        </Modal.Body>
+      </Modal>
+
+      {/* Modal for Reset Password */}
+      <Modal show={showResetPassword} onHide={() => setShowResetPassword(false)} centered>
+        <Modal.Header closeButton>
+          <Modal.Title>Reset Password</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form>
-            <Form.Group controlId="formCreateAdminEmail">
-              <Form.Label>Email address</Form.Label>
-              <Form.Control type="email" placeholder="Enter email" value={adminname} onChange={e => setAdminname(e.target.value)} />
+            <Form.Group controlId="formNewPassword">
+              <Form.Label>New Password</Form.Label>
+              <Form.Control type="password" placeholder="Enter new password" value={password} onChange={e => setPassword(e.target.value)} />
             </Form.Group>
-            <Form.Group controlId="formCreateAdminPassword">
-              <Form.Label>Password</Form.Label>
-              <Form.Control type="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)} />
+            <Form.Group controlId="formConfirmPassword">
+              <Form.Label>Confirm Password</Form.Label>
+              <Form.Control type="password" placeholder="Confirm new password" />
             </Form.Group>
             <div className="text-center">
-              <Button variant="dark" onClick={handleCreateAdmin}>
-                Create Admin
+              <Button variant="dark" onClick={() => handleResetPassword(true)}>
+                Confirm
               </Button>
             </div>
           </Form>
