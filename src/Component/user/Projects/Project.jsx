@@ -29,6 +29,7 @@ import React, { useEffect, useState } from "react";
 import "./Projects.css";
 import logo from '../../../assets/logo.png';
 import { useNavigate } from "react-router-dom";
+import Cookies from "js-cookie";
 
 const { Option } = Select;
 const base_url = import.meta.env.VITE_APP_BACKEND_URL;
@@ -97,6 +98,8 @@ const Project = () => {
   const [collapsed, setCollapsed] = useState(false);
   const navigate = useNavigate(); // Initialize navigate hook
 
+  const cookieValue = Cookies.get("token");
+
   const toggleCollapsed = () => {
     setCollapsed(!collapsed);
   };
@@ -108,6 +111,14 @@ const Project = () => {
       // location.reload(true);
     } catch (error) {
       console.log(error);
+    }
+  };
+
+  const handleSettingNavigate =  () => {
+    if (cookieValue) {
+      navigate('/account');
+    } else {
+      alert("please login");
     }
   };
 
@@ -124,7 +135,7 @@ const Project = () => {
         navigate('/addadmin');
         break;
       case '9':
-        navigate('/account');
+        handleSettingNavigate();
         break;
       case '10':
         handleLogout();
