@@ -115,7 +115,7 @@ const handleMenuClick = (e) => {
       filterPostsByCategory('Top Rated');
       break;
     case '9':
-      navigate('/account-user');
+      navigate('/accountUser');
       break;
     case '10':
       handleLogout();

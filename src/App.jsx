@@ -16,6 +16,7 @@ import AddFirstAdminPage from "./Pages/User Pages/AddFirstAdminPage.jsx";
 import AddAdminPage from "./Pages/User Pages/AddAdminPage.jsx";
 import axios from "axios";
 import AdminListPage from "./Pages/User Pages/AdminListPage.jsx";
+import AccountUser from "./Pages/User Pages/AccountUser.jsx";
 
 
 function App() {
@@ -36,6 +37,7 @@ function App() {
       <Route path="/addfirstadmin" element={<AddFirstAdminPage/>}></Route>
       <Route path="/addadmin" element={<AddAdminPage/>}></Route>
       <Route path="/adminList" element={<AdminListPage/>}></Route>
+      <Route path="/accountUser" element={<AccountUser/>}></Route>
 
 
         
