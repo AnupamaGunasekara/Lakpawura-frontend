@@ -24,6 +24,7 @@ function UpdateAccount() {
     mobileno: "",
     adminid: "",
     birthday: "",
+    password:""
   });
 
   useEffect(() => {
@@ -79,9 +80,60 @@ function UpdateAccount() {
     }
   };
 
+
+  const handlePasswordChange = async (event) => {
+    event.preventDefault();
+    console.log("jjjjjjjjjjjjjjjjjjjjjj")
+
+    if (changePassword) {
+      if (password === "") {
+        setWarning("Enter password!");
+        return;
+      }
+      if (confirmPassword === "") {
+        setWarning("Confirm password!");
+        return;
+      }
+      if (password !== confirmPassword) {
+        setWarning("Passwords do not match!");
+        setPassword("");
+        setConfirmPassword("");
+        return;
+      }
+    }
+
+  
+
+    try {
+      setLoading(true);
+      console.log(values);
+      const res = await axios.patch(
+        `${base_url}/api/admin/updatebasicdetailswithpassword`,
+        values
+      );
+      if (res.data.status) {
+        message.success("Updated successfully!"); // Display success message
+        setTimeout(() => {
+          setLoading(false);
+        }, 1000); // Navigate after a short delay
+      } else if (res.data.message === "user exist") {
+        message.error("Email is already registered!");
+        setLoading(false);
+      } else {
+        message.error("System Error!");
+        setLoading(false);
+      }
+    } catch (error) {
+      message.error("Error occurred during update!");
+      setLoading(false);
+    }
+
+
+  };
+
   return (
     <div className="position">
-      <form onSubmit={handleSubmit}>
+      <form>
         <h2>Update Account</h2>
 
         <div className="form-group">
@@ -230,6 +282,7 @@ function UpdateAccount() {
             htmlType="submit"
             loading={loading}
             disabled={loading}
+            onClick={changePassword ? handlePasswordChange : handleSubmit}
           >
             {loading ? <Spin size="small" /> : "Update"}
           </Button>
