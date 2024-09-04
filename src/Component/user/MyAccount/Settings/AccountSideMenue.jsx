@@ -14,6 +14,7 @@ import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import axios  from 'axios';
 
 
+
 const items = [
     {
         key: '1',
@@ -65,7 +66,7 @@ const items = [
       },
 ];
 
-export default function AdminAccount() {
+export default function AccountSideMenue() {
   const [collapsed, setCollapsed] = useState(false);
   const navigate = useNavigate(); // Initialize navigate hook
 
@@ -101,8 +102,11 @@ export default function AdminAccount() {
       case '9':
         navigate('/account');
         break;
+      case 'sub1':
+        navigate('/adminList');
+        break;
       case '10':
-        navigate('/');
+        handleLogout();
         break;
       default:
         console.log('Menu item:', e.key);
@@ -119,7 +123,7 @@ export default function AdminAccount() {
         {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
       </Button>
       <Menu
-        defaultSelectedKeys={['1']}
+        defaultSelectedKeys={['9']}
         defaultOpenKeys={['sub1']}
         mode="inline"
         theme="dark"

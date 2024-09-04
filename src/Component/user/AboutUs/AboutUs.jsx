@@ -4,8 +4,10 @@ import { FacebookOutlined, TwitterOutlined, InstagramOutlined, PhoneOutlined, Gl
 import './AboutUs.css';
 import logo from '../../../assets/logo.png';
 import background from '../../../assets/banner-bg.png';
+import { useNavigate } from 'react-router-dom';
 
 const AboutUs = () => {
+  const navigate = useNavigate();
   return (
     <div className="about-us">
      <section className="company-overview-section" >
@@ -16,8 +18,8 @@ const AboutUs = () => {
         </header>
         <div className="company-info">
           <h2>Our Company</h2>
-          <p>
-          Lakwapura is a non-governmental organization (NGO) based in Sri Lanka, dedicated to empowering local communities through sustainable development initiatives. The NGO focuses on various sectors such as education, health, environmental conservation, and economic development. By implementing grassroots projects and collaborating with local and international partners, Lakwapura aims to improve the quality of life for underserved populations. Their holistic approach ensures that communities are not only equipped with the necessary resources and skills but are also supported in building a sustainable future. Through their efforts, Lakwapura is committed to fostering social equity, environmental stewardship, and economic resilience across Sri Lanka.
+          <p style={{fontSize:"20px"}}>
+          නායකත්ව හා පෞරුෂත්ව සංවර්ධනය. විවිධ අධ්‍යාපනික වැඩසටහන් සැලසුම් කිරීම, නිර්මාණය කිරීම, ක‍්‍රියාත්මක කිරීම හා අගැයීම. ක‍්‍රීඩා ක්‍ෂේත‍්‍රය සංවර්ධනය කිරීම හා අගැයීම. ස්වාභාවික අනතුරු හෝ වසංගත රෝගවලින් විපතට/බලපෑමට ලක්වන ශ‍්‍රී ලාංකික මානව ප‍්‍රජාව අරබයා සහන වැඩසටහන්/මෙහෙයුම් ක‍්‍රියාත්මක කිරීම. සාම්ප‍්‍රදායික දේශීය කර්මාන්ත යළි නඟා සිටුවීම. නගරය කේන්ද්‍ර කර ගත් වෙළඳපොළ ක‍්‍රමයට සමගාමීව ග‍්‍ර‍්‍රාමීය වෙළඳපොළ ක‍්‍රමය තුළින් නව රැකියා උත්පාදනය. සෞඛ්‍ය, ආහාර හා පෝෂණ වැඩසටහන් කි‍්‍රියාත්මක කිරීම. විශේෂ අවශ්‍යතා සහිත වැඩිහිටි පුරවැසියන්, කාන්තාවන් හා ළමුන් වෙනුවෙන් විවිධ සමාජ සේවා වැඩසටහන් ක‍්‍රියාත්මක කිරීම. තරුණ, වැඩිහිටි, කාන්තා හා ළමා යන සමාජ කණ්ඩායම්හි කාලීන ගැටලූ හා අවශ්‍යතා හඳුනාගෙන ඒ සඳහා වන විවිධ වැඩසටහන් හා ව්‍යාපෘති කි‍්‍රියාත්මක කිරීම හා අගැයීම. සමාජ විරෝධී ක‍්‍රියා තුළින් ළමා හා තරුණ පරපුර මුදවා ගැනීමේ වැඩසටහන් හඳුනා ගැනීම, සැලසුම් කිරීම, කි‍්‍රියාත්මක කිරීම, අගැයීම හා ඒ සඳහා වූූ රාජ්‍ය යාන්ත‍්‍රණයට සහාය වීම. මූූලික මානව අයිතීන් පිළිබඳ ශ‍්‍රී ලාංකික මානව ප‍්‍රජාව දැනුවත් කිරීම. අල්ලස් හෝ දූෂණ ක‍්‍රියා අවම කිරීම සඳහා වන සමාජ දැනුවත් කිරීමේ වැඩසටහන් පැවැත්වීම හා ඒ සඳහා වූ රාජ්‍ය යාන්ත‍්‍රණයට සහාය වීම. ජාතීන් අතර සංහිඳියාව හා ශ‍්‍රී ලාංකික ජාතිකත්වය වර්ධනය වන විවිධ සංස්කෘතික වැඩසටහන් හඳුනා ගැනීම, සැලසුම් කිරීම, කි‍්‍රියාත්මක කිරීම හා අගැයීම. නව සොයා ගැනීම් හෝ නව නිපැයුම් වෙනුවෙන් තරුණ ව්‍යවසායකයින් දිරි ගැන්වීම. 
           </p>
         </div>
       </div>
@@ -56,7 +58,7 @@ const AboutUs = () => {
               hoverable
               cover={<img alt="Service 1" src="https://images.pexels.com/photos/135020/pexels-photo-135020.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" />}
             >
-              <Card.Meta title="Website & SEO" description="Lorem ipsum dolor sit amet, consectetur adipiscing elit." />
+              <Card.Meta title="නායකත්ව හා පෞරුෂත්ව සංවර්ධනය." description="Lorem ipsum dolor sit amet, consectetur adipiscing elit." />
             </Card>
           </Col>
           <Col span={8}>
@@ -64,7 +66,7 @@ const AboutUs = () => {
               hoverable
               cover={<img alt="Service 2" src="https://images.pexels.com/photos/1416530/pexels-photo-1416530.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1://images.pexels.com/photos/13392275/pexels-photo-13392275.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" />}
             >
-              <Card.Meta title="UI/UX" description="Lorem ipsum dolor sit amet, consectetur adipiscing elit." />
+              <Card.Meta title="ආර්ථික වර්ධනය හා සංවර්ධනය" description="Lorem ipsum dolor sit amet, consectetur adipiscing elit." />
             </Card>
           </Col>
           <Col span={8}>
@@ -72,7 +74,7 @@ const AboutUs = () => {
               hoverable
               cover={<img alt="Service 3" src="https://images.pexels.com/photos/267371/pexels-photo-267371.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" />}
             >
-              <Card.Meta title="Logo Design" description="Lorem ipsum dolor sit amet, consectetur adipiscing elit." />
+              <Card.Meta title="සමාජ, සංස්කෘතික හා අධ්‍යාත්මික සංවර්ධනය." description="Lorem ipsum dolor sit amet, consectetur adipiscing elit." />
             </Card>
           </Col>
         </Row>
@@ -107,7 +109,7 @@ const AboutUs = () => {
           </Col>
         </Row>
         <Row justify="center" style={{ marginTop: '20px' }}>
-          <Button type="primary" size="large">Contact Us</Button>
+          <Button type="primary" size="large" onClick={() => navigate("/contact")}>Contact Us</Button>
         </Row>
       </footer>
     </div>

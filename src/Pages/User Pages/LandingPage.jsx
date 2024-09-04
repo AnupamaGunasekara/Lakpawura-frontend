@@ -94,7 +94,7 @@ const LandingPage = () => {
       <div className="landing-content">
         <div className="text-section">
           <h1 className="landing-title">Welcome to Lakpawura</h1>
-          <p className="landing-subtitle">Your gateway to a world of possibilities.</p>
+          <p className="landing-subtitle">ලක්පවුර සංවිධානය</p>
         </div>
         <div className="button-section">
           <Button variant="dark" size="lg" block onClick={() => setShowUserLogin(true)}>

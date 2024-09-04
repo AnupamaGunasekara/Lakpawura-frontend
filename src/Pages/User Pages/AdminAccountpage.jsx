@@ -1,6 +1,8 @@
 import React from 'react'
 import HeaderAdmin from '../../Component/user/Header/HeaderAdmin'
-import AdminAccount from '../../Component/user/MyAccount/AdminAccount'
+import AccountSideMenue from '../../Component/user/MyAccount/Settings/AccountSideMenue'
+import UpdateAccount from '../../Component/user/MyAccount/Settings/UpdateAccount'
+
 
 
 
@@ -11,7 +13,10 @@ export default function
     <div>
         <div><HeaderAdmin/></div>  
 
-        <div><AdminAccount/></div> 
+        <div><AccountSideMenue/></div>
+
+        <div><UpdateAccount/></div>
+
     </div>
   )
 }
