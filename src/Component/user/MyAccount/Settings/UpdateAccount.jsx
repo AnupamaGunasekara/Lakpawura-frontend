@@ -9,7 +9,7 @@ import { jwtDecode } from "jwt-decode";
 function UpdateAccount() {
   const base_url = import.meta.env.VITE_APP_BACKEND_URL;
   const cookieValue = Cookies.get("token");
-  let userId ;
+  const userId = jwtDecode(cookieValue).id;
 
   const navigate = useNavigate();
   const [warning, setWarning] = useState("");
@@ -26,17 +26,6 @@ function UpdateAccount() {
     birthday: "",
     password:""
   });
-
-
-  useEffect(() => {
-      if (cookieValue) {
-          const decodedToken = jwtDecode(cookieValue);
-          userId = decodedToken.id;
-          console.log(userId, name);
-      } else {
-          console.log("No token found");
-      }
-  }, [cookieValue]);
 
   useEffect(() => {
     const fetchData = async () => {
