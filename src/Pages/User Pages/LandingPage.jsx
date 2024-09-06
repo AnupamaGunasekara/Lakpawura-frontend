@@ -1,11 +1,13 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { Button, Form, Modal, Nav, Navbar } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { message } from 'antd';
 import './LandingPage.css';
 import logo from '../../assets/logo.png';
 import axios from "axios";
+import { jwtDecode } from "jwt-decode";
+import Cookies from 'js-cookie';
 
 const LandingPage = () => {
   const navigate = useNavigate();
@@ -17,6 +19,22 @@ const LandingPage = () => {
   const [adminname, setAdminname] = useState('');
   const [loginError, setLoginError] = useState(false);
   const base_url = import.meta.env.VITE_APP_BACKEND_URL;
+
+  const cookieValue = Cookies.get('token');
+
+  
+
+
+  useEffect(() => {
+    if (cookieValue) {
+        const decodedToken = jwtDecode(cookieValue);
+        userId = decodedToken.id;
+        const name = decodedToken.name;
+        console.log(userId, name);
+    } else {
+        console.log("No token found");
+    }
+}, [cookieValue]);
 
   const handleUserLogin = async () => {
     try {
@@ -31,6 +49,15 @@ const LandingPage = () => {
       }
     } catch (error) {
       console.log(error);
+    }
+  };
+
+  const handleSettingNavigate =  () => {
+    console.log("ooooooooooo")
+    if (cookieValue) {
+        navigate('/accountuser');
+    } else {
+      message.error("Please login to access account settings!");
     }
   };
 
@@ -78,7 +105,7 @@ const LandingPage = () => {
             <Nav.Link onClick={() => navigate("/about")}>About Us</Nav.Link>
             <Nav.Link onClick={() => navigate("/projectsUser")}>Projects</Nav.Link>
             <Nav.Link onClick={() => navigate("/contact")}>Contact</Nav.Link>
-            <Nav.Link onClick={() => navigate("/accountUser")}>My Account</Nav.Link>
+            <Nav.Link onClick={() => handleSettingNavigate()}>My Account</Nav.Link>
             <div className="brand-container">
               <img className='logo-png' src={logo} alt="Logo" />
               <h4 className='name'>Lakpawura</h4>
