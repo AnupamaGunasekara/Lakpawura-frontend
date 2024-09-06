@@ -21,6 +21,7 @@ const LandingPage = () => {
   const base_url = import.meta.env.VITE_APP_BACKEND_URL;
 
   const cookieValue = Cookies.get('token');
+  let userId;
 
   
 
