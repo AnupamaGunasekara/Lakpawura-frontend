@@ -2,14 +2,29 @@ import React, { useEffect, useState } from "react";
 import { Button, message, Spin } from "antd"; // Import Ant Design components
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import './UpdateAccount.css';
+import "./UpdateAccount.css";
 import Cookies from "js-cookie";
 import { jwtDecode } from "jwt-decode";
 
 function UpdateAccount() {
   const base_url = import.meta.env.VITE_APP_BACKEND_URL;
-  const cookieValue = Cookies.get("token");
-  const userId = jwtDecode(cookieValue).id;
+  let userId;
+  const accessToken = localStorage.getItem("token");
+  if (accessToken) {
+    userId = jwtDecode(accessToken).id;
+  }
+  
+  
+
+  // useEffect(() => { 
+  //     try {
+  //       const accessToken = localStorage.getItem("token");
+  //       if (accessToken) {
+  //         userId = jwtDecode(accessToken).id;
+  //       }
+  //     } catch (error) {}
+    
+  // }, []);
 
   const navigate = useNavigate();
   const [warning, setWarning] = useState("");
@@ -24,14 +39,17 @@ function UpdateAccount() {
     mobileno: "",
     adminid: "",
     birthday: "",
-    password:""
+    password: "",
   });
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`${base_url}/api/admin/getdetails/${userId}`);
-        const { email, name, address, mobileno, adminid, birthday } = response.data.Data;
+        const response = await axios.get(
+          `${base_url}/api/admin/getdetails/${userId}`
+        );
+        const { email, name, address, mobileno, adminid, birthday } =
+          response.data.Data;
         setValues({ email, name, address, mobileno, adminid, birthday });
       } catch (error) {
         console.error("Error fetching user data:", error);
@@ -39,7 +57,7 @@ function UpdateAccount() {
     };
 
     fetchData();
-  }, [userId]);
+  }, []);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -63,10 +81,17 @@ function UpdateAccount() {
 
     try {
       setLoading(true);
-      const res = await axios.post(`${base_url}/api/admin/update/${userId}`, values);
+      console.log("=============")
+      console.log(userId)
+      const res = await axios.post(
+        `${base_url}/api/admin/update/${userId}`,
+        values
+      );
       if (res.data.Status === "Success") {
         message.success("Updated successfully!"); // Display success message
-        setTimeout(() => {setLoading(false); }, 1000); // Navigate after a short delay
+        setTimeout(() => {
+          setLoading(false);
+        }, 1000); // Navigate after a short delay
       } else if (res.data.message === "user exist") {
         message.error("Email is already registered!");
         setLoading(false);
@@ -80,10 +105,9 @@ function UpdateAccount() {
     }
   };
 
-
   const handlePasswordChange = async (event) => {
     event.preventDefault();
-    console.log("jjjjjjjjjjjjjjjjjjjjjj")
+    console.log("jjjjjjjjjjjjjjjjjjjjjj");
 
     if (changePassword) {
       if (password === "") {
@@ -101,8 +125,6 @@ function UpdateAccount() {
         return;
       }
     }
-
-  
 
     try {
       setLoading(true);
@@ -127,8 +149,6 @@ function UpdateAccount() {
       message.error("Error occurred during update!");
       setLoading(false);
     }
-
-
   };
 
   return (

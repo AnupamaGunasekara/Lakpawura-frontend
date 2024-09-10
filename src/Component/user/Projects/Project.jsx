@@ -95,7 +95,7 @@ const Project = () => {
   const pageSize = 1; // Display one post per page
 
   const [collapsed, setCollapsed] = useState(false);
-  const navigate = useNavigate(); // Initialize navigate hook
+  const newnavigate = useNavigate(); // Initialize navigate hook
 
   const toggleCollapsed = () => {
     setCollapsed(!collapsed);
@@ -104,27 +104,47 @@ const Project = () => {
   const handleLogout = async (event) => {
     try {
       const res = await axios.get(`${base_url}/api/user/logout`);
-      navigate("/");
+      newnavigate("/");
       // location.reload(true);
     } catch (error) {
       console.log(error);
     }
   };
 
+
+  const handleSettingNavigate = async (event, navigate) => {
+    try {
+      console.log("start")
+      const accessToken = localStorage.getItem('token');
+      if (accessToken) {
+        newnavigate('/account');
+
+      }
+      else{
+        message.error("please login to access account settings!");
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  };
+
+
+  
+
   const handleMenuClick = (e) => {
     // Handling navigation based on key
     switch (e.key) {
       case '1':
-        navigate('/projects');
+        newnavigate('/projects');
         break;
       case '2':
-        navigate('/messages');
+        newnavigate('/messages');
         break;
       case '3':
-        navigate('/addadmin');
+        newnavigate('/addadmin');
         break;
       case '9':
-        navigate('/account');
+        handleSettingNavigate();
         break;
       case '10':
         handleLogout();

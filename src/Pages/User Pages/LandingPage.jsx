@@ -68,7 +68,11 @@ const LandingPage = () => {
         userName: adminname,
         password: password
       });
+  
       if (res.data.Status === "Success") {
+        // Save the token in localStorage
+        localStorage.setItem("token", res.data.token);
+        // Navigate to the projects page
         navigate("/projects");
       } else {
         alert("Login Failed!");
@@ -77,6 +81,7 @@ const LandingPage = () => {
       console.log(error);
     }
   };
+  
 
   const handleCreateAdmin = async () => {
     try {
