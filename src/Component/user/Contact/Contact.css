@@ -1,0 +1,72 @@
+.contact {
+    padding: 50px 0;
+    background-image: url('../../../assets/banner-bg.png');
+}
+
+.contact img {
+    width: 100%;
+    height: auto;
+}
+
+.contact h2 {
+    margin-bottom: 30px;
+}
+
+.contact form {
+    display: flex;
+    flex-direction: column;
+}
+
+.contact input,
+.contact textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.contact button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    border: none;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.contact button:hover {
+    background-color: #0056b3;
+}
+
+.contact .success {
+    color: green;
+}
+
+.contact .danger {
+    color: red;
+}
+
+.about-us-footer {
+    background: #000000;
+    color: #fff;
+    padding: 40px 20px;
+}
+
+.about-us-footer .ant-row {
+    margin-bottom: 10px;
+}
+
+.about-us-footer .ant-col {
+    text-align: center;
+}
+
+.about-us-footer .ant-btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.about-us-footer .ant-btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+}

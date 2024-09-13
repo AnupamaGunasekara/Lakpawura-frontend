@@ -1,0 +1,170 @@
+
+.about-us {
+  background-color: #1a1a1a;
+  color: #fff;
+  padding: 120px 20px;
+  text-align: center;
+  background-image: url('../../../assets/banner-bg.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+}
+
+
+.about-us-header {
+  position: relative;
+  text-align: center;
+  padding-top: 20px;
+  margin-bottom: 30px;
+  display: flex; 
+  flex-direction: column;
+  align-items: center; 
+}
+
+.logo {
+  width: 110px;
+  height: auto;
+  margin-top: 20px; 
+  max-width: 100%; 
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 768px) {
+  .logo {
+    width: 90px; 
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .logo {
+    width: 70px; 
+  }
+}
+
+
+
+.highlighted {
+  color: #FFD700;
+  font-size: 3em;
+  font-weight: bold;
+  margin-top: 20px;
+  padding: 20px;
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: 0.15em solid rgba(255, 255, 255, 0.75);
+  animation: typewriter 3s steps(30,end), blinkTextCursor 0.75s step-end infinite;
+}
+
+
+.company-overview-section {
+  position: relative;
+  height: auto;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding: 20px;
+  margin-top: -60px;
+}
+
+.overlay {
+  position: relative;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 20px;
+  text-align: center;
+  color: white;
+  border-radius: 10px;
+}
+
+
+.company-info {
+  margin-top: 30px;
+  text-align: left;
+}
+
+.company-info h2 {
+  font-size: 2em;
+  margin: 20px 0;
+}
+
+.company-info p {
+  font-size: 1.2em;
+  margin: 20px 0;
+  padding: 20px;
+  text-align: justify;
+}
+
+
+.section {
+  padding: 40px 20px;
+  margin-bottom: 20px;
+}
+
+.section h2 {
+  font-size: 2em;
+  margin-bottom: 20px;
+}
+
+.section .ant-card {
+  margin-bottom: 20px;
+}
+
+@media screen and (max-width: 768px) {
+  .section h2 {
+    font-size: 1.8em;
+  }
+  .section .ant-card {
+    margin-bottom: 15px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .section h2 {
+    font-size: 1.6em;
+  }
+}
+
+
+.about-us-footer {
+  background: #000000bd;
+  color: #fff;
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.about-us-footer .ant-col {
+  margin-bottom: 10px;
+}
+
+.about-us-footer .ant-col a {
+  display: inline-block;
+  margin: 0 10px;
+  transition: transform 0.3s;
+}
+
+.about-us-footer .ant-col a:hover {
+  transform: scale(1.1);
+}
+
+/* Animations */
+@keyframes typewriter {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes blinkTextCursor {
+  0% {
+    border-right-color: rgba(255, 255, 255, 0.75);
+  }
+  50% {
+    border-right-color: transparent;
+  }
+  100% {
+    border-right-color: rgba(255, 255, 255, 0.75);
+  }
+}

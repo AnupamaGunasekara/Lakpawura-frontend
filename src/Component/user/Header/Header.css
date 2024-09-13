@@ -1,0 +1,28 @@
+.navigation-bar {
+    padding: 1rem;
+    background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent background */
+}
+
+.navbar-nav .nav-link {
+    color: #fff;
+    margin-right: 1rem;
+}
+
+.navbar-nav .nav-link:hover {
+    color: #c19a6b; /* Brown color */
+}
+
+.logo-png {
+    width: 9%;
+}
+
+.brand-container {
+    display: flex;
+    align-items: center;
+    margin-left:auto ;
+}
+
+.name {
+    color: #fff;
+    margin-left: 15px; /* Add margin to the left of the name to create the gap */
+}
