@@ -56,15 +56,23 @@ function LandingPage() {
         </div>
       </Navbar>
       <div className="text-section text-center mt-5">
+        <header className="about-us-header">
+          <img src={logo} alt="Your Logo" className="logo" />
+        </header>
         <h1 className="landing-title">Welcome to Lakpawura</h1>
         <p className="landing-subtitle fs-3">ලක්පවුර සංවිධානය</p>
       </div>
       <div>
         <div className="about-us">
-          <section className="company-overview-section">
+          <h2 className="mb-5">Our Projects</h2>
+          <div>
+            <ProjectCard />
+          </div>
+
+          <section className="company-overview-section mt-5">
             <div className="overlay">
               <header className="about-us-header">
-                <img src={logo} alt="Your Logo" className="logo" />
+                {/* <img src={logo} alt="Your Logo" className="logo" /> */}
                 <h1 className="highlighted">About Us</h1>
               </header>
               <div className="company-info">
@@ -97,10 +105,6 @@ function LandingPage() {
               </div>
             </div>
           </section>
-
-          <div>
-            <ProjectCard />
-          </div>
 
           <section className="services section">
             <h2>Our Services</h2>
