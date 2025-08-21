@@ -1,228 +1,220 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
-import React, { useState,useEffect } from 'react';
-import { Button, Form, Modal, Nav, Navbar } from 'react-bootstrap';
-import { useNavigate } from 'react-router-dom';
-import { message } from 'antd';
-import './LandingPage.css';
-import logo from '../../assets/logo.png';
-import axios from "axios";
-import { jwtDecode } from "jwt-decode";
-import Cookies from 'js-cookie';
-
-const LandingPage = () => {
+import React from "react";
+import AboutUs from "../../Component/user/AboutUs/AboutUs";
+import { Form, Modal, Nav, Navbar } from "react-bootstrap";
+import logo from "../../assets/logo.png";
+import {
+  FacebookOutlined,
+  TwitterOutlined,
+  InstagramOutlined,
+  PhoneOutlined,
+  GlobalOutlined,
+} from "@ant-design/icons";
+import { useNavigate } from "react-router-dom";
+import { Button, Row, Col, Card } from "antd";
+import ProjectCard from "../../Component/user/Projects/ProjectCard";
+function LandingPage() {
   const navigate = useNavigate();
-  const [showUserLogin, setShowUserLogin] = useState(false);
-  const [showAdminLogin, setShowAdminLogin] = useState(false);
-  const [showCreateAdmin, setShowCreateAdmin] = useState(false);
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [adminname, setAdminname] = useState('');
-  const [loginError, setLoginError] = useState(false);
-  const base_url = import.meta.env.VITE_APP_BACKEND_URL;
-
-  const cookieValue = Cookies.get('token');
-  let userId;
-
-  
-
-
-  useEffect(() => {
-    if (cookieValue) {
-        const decodedToken = jwtDecode(cookieValue);
-        userId = decodedToken.id;
-        const name = decodedToken.name;
-        console.log(userId, name);
-    } else {
-        console.log("No token found");
-    }
-}, [cookieValue]);
-
-  const handleUserLogin = async () => {
-    try {
-      const res = await axios.post(`${base_url}/api/user/login`, {
-        email: username,
-        password: password
-      });
-      if (res.data.Status === "Success") {
-        navigate("/projectsUser");
-      } else {
-        alert("Login Failed!");
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const handleSettingNavigate =  () => {
-    console.log("ooooooooooo")
-    if (cookieValue) {
-        navigate('/accountuser');
-    } else {
-      message.error("Please login to access account settings!");
-    }
-  };
-
-  const handleAdminLogin = async () => {
-    try {
-      const res = await axios.post(`${base_url}/api/admin/login`, {
-        userName: adminname,
-        password: password
-      });
-  
-      if (res.data.Status === "Success") {
-        // Save the token in localStorage
-        localStorage.setItem("token", res.data.token);
-        // Navigate to the projects page
-        navigate("/projects");
-      } else {
-        alert("Login Failed!");
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  
-
-  const handleCreateAdmin = async () => {
-    try {
-      const res = await axios.post(`${base_url}/api/admin/create`, {
-        email: adminname,
-        password: password
-      });
-      if (res.data.Status === "Success") {
-        message.success("Admin account created successfully!");
-        setShowCreateAdmin(false);
-      } else {
-        message.error("Failed to create admin account!");
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   return (
-    <div className="landing-page">
-      <div className="background-image"></div>
+    <>
       <Navbar className="navigation-bar" expand="lg">
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ml-auto">
             <Nav.Link onClick={() => navigate("/")}>Home</Nav.Link>
             <Nav.Link onClick={() => navigate("/about")}>About Us</Nav.Link>
-            <Nav.Link onClick={() => navigate("/projectsUser")}>Projects</Nav.Link>
+            <Nav.Link onClick={() => navigate("/projectsUser")}>
+              Projects
+            </Nav.Link>
             <Nav.Link onClick={() => navigate("/contact")}>Contact</Nav.Link>
-            <Nav.Link onClick={() => handleSettingNavigate()}>My Account</Nav.Link>
+            <Nav.Link onClick={() => handleSettingNavigate()}>
+              My Account
+            </Nav.Link>
             <div className="brand-container">
-              <img className='logo-png' src={logo} alt="Logo" />
-              <h4 className='name'>Lakpawura</h4>
+              <img className="logo-png" src={logo} alt="Logo" />
+              <h4 className="name">Lakpawura</h4>
             </div>
           </Nav>
         </Navbar.Collapse>
-        <div className="signup-button">
-          <Button variant="brown" onClick={() => navigate("/signup")}>
-            Sign Up
+        <div
+          className="signup-button"
+          style={{ display: "flex", justifyContent: "center" }}
+        >
+          <Button
+            className="btn btn-primary"
+            style={{
+              fontSize: "18px",
+              padding: "10px 24px",
+              lineHeight: "1.5",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+            onClick={() => navigate("/signin")}
+          >
+            Login
           </Button>
         </div>
       </Navbar>
-      <div className="landing-content">
-        <div className="text-section">
-          <h1 className="landing-title">Welcome to Lakpawura</h1>
-          <p className="landing-subtitle">ලක්පවුර සංවිධානය</p>
-        </div>
-        <div className="button-section">
-          <Button variant="dark" size="lg" block onClick={() => setShowUserLogin(true)}>
-            Login as Registered User
-          </Button>
-          <Button variant="dark" size="lg" block onClick={() => setShowAdminLogin(true)}>
-            Login as Administrator
-          </Button>
+      <div className="text-section text-center mt-5">
+        <h1 className="landing-title">Welcome to Lakpawura</h1>
+        <p className="landing-subtitle fs-3">ලක්පවුර සංවිධානය</p>
+      </div>
+      <div>
+        <div className="about-us">
+          <section className="company-overview-section">
+            <div className="overlay">
+              <header className="about-us-header">
+                <img src={logo} alt="Your Logo" className="logo" />
+                <h1 className="highlighted">About Us</h1>
+              </header>
+              <div className="company-info">
+                <h2>Our Company</h2>
+                <p>
+                  නායකත්ව හා පෞරුෂත්ව සංවර්ධනය. විවිධ අධ්‍යාපනික වැඩසටහන්
+                  සැලසුම් කිරීම, නිර්මාණය කිරීම, ක‍්‍රියාත්මක කිරීම හා අගැයීම.
+                  ක‍්‍රීඩා ක්‍ෂේත‍්‍රය සංවර්ධනය කිරීම හා අගැයීම. ස්වාභාවික
+                  අනතුරු හෝ වසංගත රෝගවලින් විපතට/බලපෑමට ලක්වන ශ‍්‍රී ලාංකික මානව
+                  ප‍්‍රජාව අරබයා සහන වැඩසටහන්/මෙහෙයුම් ක‍්‍රියාත්මක කිරීම.
+                  සාම්ප‍්‍රදායික දේශීය කර්මාන්ත යළි නඟා සිටුවීම. නගරය කේන්ද්‍ර
+                  කර ගත් වෙළඳපොළ ක‍්‍රමයට සමගාමීව ග‍්‍ර‍්‍රාමීය වෙළඳපොළ ක‍්‍රමය
+                  තුළින් නව රැකියා උත්පාදනය. සෞඛ්‍ය, ආහාර හා පෝෂණ වැඩසටහන්
+                  කි‍්‍රියාත්මක කිරීම. විශේෂ අවශ්‍යතා සහිත වැඩිහිටි පුරවැසියන්,
+                  කාන්තාවන් හා ළමුන් වෙනුවෙන් විවිධ සමාජ සේවා වැඩසටහන්
+                  ක‍්‍රියාත්මක කිරීම. තරුණ, වැඩිහිටි, කාන්තා හා ළමා යන සමාජ
+                  කණ්ඩායම්හි කාලීන ගැටලූ හා අවශ්‍යතා හඳුනාගෙන ඒ සඳහා වන විවිධ
+                  වැඩසටහන් හා ව්‍යාපෘති කි‍්‍රියාත්මක කිරීම හා අගැයීම. සමාජ
+                  විරෝධී ක‍්‍රියා තුළින් ළමා හා තරුණ පරපුර මුදවා ගැනීමේ වැඩසටහන්
+                  හඳුනා ගැනීම, සැලසුම් කිරීම, කි‍්‍රියාත්මක කිරීම, අගැයීම හා ඒ
+                  සඳහා වූූ රාජ්‍ය යාන්ත‍්‍රණයට සහාය වීම. මූූලික මානව අයිතීන්
+                  පිළිබඳ ශ‍්‍රී ලාංකික මානව ප‍්‍රජාව දැනුවත් කිරීම. අල්ලස් හෝ
+                  දූෂණ ක‍්‍රියා අවම කිරීම සඳහා වන සමාජ දැනුවත් කිරීමේ වැඩසටහන්
+                  පැවැත්වීම හා ඒ සඳහා වූ රාජ්‍ය යාන්ත‍්‍රණයට සහාය වීම. ජාතීන්
+                  අතර සංහිඳියාව හා ශ‍්‍රී ලාංකික ජාතිකත්වය වර්ධනය වන විවිධ
+                  සංස්කෘතික වැඩසටහන් හඳුනා ගැනීම, සැලසුම් කිරීම, කි‍්‍රියාත්මක
+                  කිරීම හා අගැයීම. නව සොයා ගැනීම් හෝ නව නිපැයුම් වෙනුවෙන් තරුණ
+                  ව්‍යවසායකයින් දිරි ගැන්වීම.
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <div>
+            <ProjectCard />
+          </div>
+
+          <section className="services section">
+            <h2>Our Services</h2>
+            <Row gutter={16}>
+              <Col span={8}>
+                <Card
+                  hoverable
+                  cover={
+                    <img
+                      alt="Service 1"
+                      src="https://images.pexels.com/photos/135020/pexels-photo-135020.jpeg"
+                    />
+                  }
+                >
+                  <Card.Meta
+                    title="නායකත්ව හා පෞරුෂත්ව සංවර්ධනය."
+                    description="Lorem ipsum dolor sit amet."
+                  />
+                </Card>
+              </Col>
+              <Col span={8}>
+                <Card
+                  hoverable
+                  cover={
+                    <img
+                      alt="Service 2"
+                      src="https://images.pexels.com/photos/1416530/pexels-photo-1416530.jpeg"
+                    />
+                  }
+                >
+                  <Card.Meta
+                    title="ආර්ථික වර්ධනය හා සංවර්ධනය"
+                    description="Lorem ipsum dolor sit amet."
+                  />
+                </Card>
+              </Col>
+              <Col span={8}>
+                <Card
+                  hoverable
+                  cover={
+                    <img
+                      alt="Service 3"
+                      src="https://images.pexels.com/photos/267371/pexels-photo-267371.jpeg"
+                    />
+                  }
+                >
+                  <Card.Meta
+                    title="සමාජ, සංස්කෘතික හා අධ්‍යාත්මික සංවර්ධනය."
+                    description="Lorem ipsum dolor sit amet."
+                  />
+                </Card>
+              </Col>
+            </Row>
+          </section>
+
+          <footer className="about-us-footer section">
+            <Row gutter={16} justify="center">
+              <Col span={4}>
+                <a
+                  href="https://www.facebook.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <FacebookOutlined
+                    style={{ fontSize: "24px", color: "#3b5998" }}
+                  />
+                </a>
+              </Col>
+              <Col span={4}>
+                <a
+                  href="https://www.twitter.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <TwitterOutlined
+                    style={{ fontSize: "24px", color: "#1DA1F2" }}
+                  />
+                </a>
+              </Col>
+              <Col span={4}>
+                <a
+                  href="https://www.instagram.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <InstagramOutlined
+                    style={{ fontSize: "24px", color: "#E1306C" }}
+                  />
+                </a>
+              </Col>
+            </Row>
+            <Row gutter={16} justify="center" style={{ marginTop: "20px" }}>
+              <Col span={12} xs={24} sm={12} md={6}>
+                <PhoneOutlined style={{ marginRight: "10px" }} />
+                +1 (123) 456-7890
+              </Col>
+              <Col span={12} xs={24} sm={12} md={6}>
+                <GlobalOutlined style={{ marginRight: "10px" }} />
+                www.lakpawra.com
+              </Col>
+            </Row>
+            <Row justify="center" style={{ marginTop: "20px" }}>
+              <Button
+                type="primary"
+                size="large"
+                onClick={() => navigate("/contact")}
+              >
+                Contact Us
+              </Button>
+            </Row>
+          </footer>
         </div>
       </div>
-
-      {/* Modal for Registered User Login */}
-      <Modal show={showUserLogin} onHide={() => setShowUserLogin(false)} centered>
-        <Modal.Header closeButton>
-          <Modal.Title>Login</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <Form>
-            <Form.Group controlId="formBasicEmail">
-              <Form.Label>Email address</Form.Label>
-              <Form.Control type="email" placeholder="Enter email" value={username} onChange={e => setUsername(e.target.value)} />
-            </Form.Group>
-            <Form.Group controlId="formBasicPassword">
-              <Form.Label>Password</Form.Label>
-              <Form.Control type="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)} />
-            </Form.Group>
-            <div className="text-center">
-              <Button variant="dark" onClick={handleUserLogin}>
-                Login
-              </Button>
-              <p className="mt-2">
-                Not registered? <span className="signup-link" onClick={() => navigate("/signup")}>Sign up here</span>
-              </p>
-              <p>
-                <Button variant="link" style={{color:"#c19a6b"}} onClick={() => navigate("/forgot-password")}>Forgot password?</Button>
-              </p>
-            </div>
-          </Form>
-        </Modal.Body>
-      </Modal>
-
-      {/* Modal for Administrator Login */}
-      <Modal show={showAdminLogin} onHide={() => setShowAdminLogin(false)} centered>
-        <Modal.Header closeButton>
-          <Modal.Title>Admin Login</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <Form>
-            <Form.Group controlId="formAdminId">
-              <Form.Label>Email address</Form.Label>
-              <Form.Control type="email" placeholder="Enter email" value={adminname} onChange={e => setAdminname(e.target.value)} />
-            </Form.Group>
-            <Form.Group controlId="formAdminPassword">
-              <Form.Label>Password</Form.Label>
-              <Form.Control type="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)} />
-            </Form.Group>
-            <div className="text-center">
-              <Button variant="dark" onClick={handleAdminLogin}>
-                Login
-              </Button>
-              <p>
-                <Button variant="link" style={{color:"white"}} onClick={() => navigate("/forgot-password-admin")}>Forgot password?</Button>
-              </p>
-              <p>
-                <Button variant="link" style={{color:"#c19a6b"}} onClick={() => navigate("/addfirstadmin")}>Create First Admin</Button>
-              </p>
-            </div>
-          </Form>
-        </Modal.Body>
-      </Modal>
-
-      {/* Modal for Creating First Admin */}
-      <Modal show={showCreateAdmin} onHide={() => setShowCreateAdmin(false)} centered>
-        <Modal.Header closeButton>
-          <Modal.Title>Create Admin</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <Form>
-            <Form.Group controlId="formCreateAdminEmail">
-              <Form.Label>Email address</Form.Label>
-              <Form.Control type="email" placeholder="Enter email" value={adminname} onChange={e => setAdminname(e.target.value)} />
-            </Form.Group>
-            <Form.Group controlId="formCreateAdminPassword">
-              <Form.Label>Password</Form.Label>
-              <Form.Control type="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)} />
-            </Form.Group>
-            <div className="text-center">
-              <Button variant="dark" onClick={handleCreateAdmin}>
-                Create Admin
-              </Button>
-            </div>
-          </Form>
-        </Modal.Body>
-      </Modal>
-    </div>
+    </>
   );
 }
 
