@@ -29,6 +29,7 @@ import React, { useEffect, useState } from "react";
 import "./Projects.css";
 import logo from '../../../assets/logo.png';
 import { useNavigate } from "react-router-dom";
+import Footer from "../Footer/Footer";
 
 const { Option } = Select;
 const base_url = import.meta.env.VITE_APP_BACKEND_URL;
@@ -326,6 +327,7 @@ const Project = () => {
   );
 
   return (
+    <>
     <div className="container-1">
       <div style={{ width: 256 }}>
         <Button
@@ -483,6 +485,8 @@ const Project = () => {
 
       </div>
     </div>
+<Footer/>
+    </>
   );
 };
 

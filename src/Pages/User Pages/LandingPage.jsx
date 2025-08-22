@@ -12,6 +12,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import { Button, Row, Col, Card } from "antd";
 import ProjectCard from "../../Component/user/Projects/ProjectCard";
+import Footer from "../../Component/user/Footer/Footer";
 function LandingPage() {
   const navigate = useNavigate();
   return (
@@ -40,7 +41,7 @@ function LandingPage() {
           style={{ display: "flex", justifyContent: "center" }}
         >
           <Button
-            className="btn btn-primary"
+            className="btn text-black"
             style={{
               fontSize: "18px",
               padding: "10px 24px",
@@ -48,6 +49,9 @@ function LandingPage() {
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
+              backgroundColor: "rgb(220, 173, 124)",
+              border: "none", // optional: removes Bootstrap's default border
+              color: "#fff", // optional: ensures text is readable on the new background
             }}
             onClick={() => navigate("/signin")}
           >
@@ -64,7 +68,6 @@ function LandingPage() {
       </div>
       <div>
         <div className="about-us">
-          <h2 className="mb-5">Our Projects</h2>
           <div>
             <ProjectCard />
           </div>
@@ -160,7 +163,7 @@ function LandingPage() {
             </Row>
           </section>
 
-          <footer className="about-us-footer section">
+          {/* <footer className="about-us-footer section">
             <Row gutter={16} justify="center">
               <Col span={4}>
                 <a
@@ -215,9 +218,11 @@ function LandingPage() {
                 Contact Us
               </Button>
             </Row>
-          </footer>
+          </footer> */}
         </div>
       </div>
+
+      <Footer />
     </>
   );
 }

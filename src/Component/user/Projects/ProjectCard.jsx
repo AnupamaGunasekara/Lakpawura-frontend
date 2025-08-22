@@ -1,16 +1,20 @@
-import { Avatar, Rate, Button, message } from "antd";
+import { Avatar, Rate, Button, message, Pagination } from "antd";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import logo from "../../../assets/logo.png";
 import "./Projects.css";
 
 // Assuming VITE_APP_BACKEND_URL is available in the environment
 const base_url = import.meta.env.VITE_APP_BACKEND_URL;
 
+const POSTS_PER_PAGE = 4;
+
 const ProjectCard = () => {
-  // State for all fetched posts and the currently displayed posts
+  // State for all fetched posts
   const [posts, setPosts] = useState([]);
+  // State for loading status
   const [loading, setLoading] = useState(true);
+  // State to manage the current page number
+  const [currentPage, setCurrentPage] = useState(1);
 
   // Function to get posts from the API
   const getPosts = async () => {
@@ -18,10 +22,8 @@ const ProjectCard = () => {
       setLoading(true);
       const response = await axios.get(`${base_url}/api/user/getPosts`);
       if (response.status === 200) {
-        // We only need to display a fixed number of posts, so we can limit the array.
-        // The request was for 8 cards.
-        // Add a new 'isExpanded' property to each post to manage the description toggle.
-        const postsWithState = response.data.data.slice(0, 8).map((post) => ({
+        // Add the 'isExpanded' property to each post for managing the description toggle
+        const postsWithState = response.data.data.map((post) => ({
           ...post,
           isExpanded: false,
         }));
@@ -31,7 +33,7 @@ const ProjectCard = () => {
       }
     } catch (error) {
       console.error("Error fetching posts:", error);
-      message.error("Failed to fetch posts!");
+      message.error("An error occurred while fetching posts.");
     } finally {
       setLoading(false);
     }
@@ -43,32 +45,35 @@ const ProjectCard = () => {
   }, []);
 
   // Function to format the post date
-  const formatDate = (date) => {
+  const formatDate = (dateString) => {
     const now = new Date();
-    const postDate = new Date(date);
-    const isToday = now.toDateString() === postDate.toDateString();
-    const isThisYear = now.getFullYear() === postDate.getFullYear();
+    const postDate = new Date(dateString);
+    const startOfNow = new Date(
+      now.getFullYear(),
+      now.getMonth(),
+      now.getDate()
+    );
+    const startOfPostDate = new Date(
+      postDate.getFullYear(),
+      postDate.getMonth(),
+      postDate.getDate()
+    );
+    const diffTime = startOfNow - startOfPostDate;
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 
-    if (isToday) {
-      return postDate.toLocaleTimeString([], {
-        hour: "2-digit",
-        minute: "2-digit",
+    if (diffDays === 0) return "Today";
+    if (diffDays === 1) return "Yesterday";
+    if (now.getFullYear() === postDate.getFullYear()) {
+      return postDate.toLocaleDateString("en-US", {
+        month: "short",
+        day: "numeric",
       });
-    } else if (isThisYear) {
-      return `${postDate.getDate()}th ${postDate.toLocaleString("default", {
-        month: "long",
-      })}, ${postDate.toLocaleTimeString([], {
-        hour: "2-digit",
-        minute: "2-digit",
-      })}`;
-    } else {
-      return `${postDate.getDate()}th ${postDate.toLocaleString("default", {
-        month: "long",
-      })} ${postDate.getFullYear()}, ${postDate.toLocaleTimeString([], {
-        hour: "2-digit",
-        minute: "2-digit",
-      })}`;
     }
+    return postDate.toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+    });
   };
 
   // Function to toggle the full description for a specific post
@@ -78,6 +83,12 @@ const ProjectCard = () => {
         post.id === postId ? { ...post, isExpanded: !post.isExpanded } : post
       )
     );
+  };
+
+  // Handler for changing the page
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+    window.scrollTo(0, 0); // Optional: scroll to top when page changes
   };
 
   // If data is still loading, show a loading message
@@ -90,7 +101,7 @@ const ProjectCard = () => {
   }
 
   // If there are no posts after loading, show a message
-  if (posts.length === 0) {
+  if (!posts || posts.length === 0) {
     return (
       <div style={{ padding: "20px", textAlign: "center", color: "white" }}>
         No posts found.
@@ -98,70 +109,90 @@ const ProjectCard = () => {
     );
   }
 
-  return (
-    <div className="posts-container-grid d-flex flex-column gap-4 align-items-center ">
-      {posts.map((post) => (
-        <div
-          key={post.id}
-          className="post-card black-font w-75"
-          style={{
-            border: "2px solid rgb(197, 154, 110)",
+  // Calculate the posts to display on the current page
+  const indexOfLastPost = currentPage * POSTS_PER_PAGE;
+  const indexOfFirstPost = indexOfLastPost - POSTS_PER_PAGE;
+  const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
 
-            borderRadius: "18px", // optional for rounded corners
-            padding: "15px", // optional for spacing inside
-          }}
-        >
-          <div style={{ display: "flex", alignItems: "center" }}>
-            <Avatar
-              src={logo}
-              style={{ width: "60px", height: "55px", padding: "10px" }}
-            />
-            <div style={{ paddingLeft: "15px", paddingTop: "20px" }}>
-              <div style={{ color: "white" }}>{post.author}</div>
-              <div>
-                <p
-                  style={{
-                    fontSize: "12px",
-                    color: "wheat",
-                    display: "block",
-                  }}
-                >
-                  {formatDate(post.createdAt)}
-                </p>
+  return (
+    <>
+      <div className="posts-container-grid row gap-5 d-flex justify-content-center">
+        {currentPosts.map((post) => (
+          <div
+            key={post.id}
+            className="post-card black-font col-12 col-lg-5"
+            style={{
+              border: "2px solid rgb(197, 154, 110)",
+              borderRadius: "18px",
+              padding: "15px",
+            }}
+          >
+            <div style={{ display: "flex", alignItems: "center" }}>
+              <div style={{ paddingLeft: "15px", paddingTop: "20px" }}>
+                <div>
+                  <p
+                    style={{
+                      fontSize: "12px",
+                      color: "wheat",
+                      display: "block",
+                    }}
+                  >
+                    {formatDate(post.createdAt)}
+                  </p>
+                </div>
               </div>
             </div>
-          </div>
-          <h3 className="text-white">{post.title}</h3>
-          <h6 style={{ color: "wheat" }}>
-            {post.category && post.category.replace("category", "Category ")}
-          </h6>
-          <p style={{ color: "white" }}>
-            {post.isExpanded
-              ? post.discription
-              : `${post.discription.slice(0, 500)}...`}
-          </p>
-          {post.images && post.images.length > 0 && (
-            <div className="uploaded-image">
-              <img
-                src={post.images[0].path}
-                alt="Post"
-                style={{ maxWidth: "35%" }}
-              />
+            <h3 className="text-white">{post.title}</h3>
+            <div className="p-5">
+              <p style={{ color: "white" }}>
+                {post.discription.length <= 500
+                  ? post.discription
+                  : post.isExpanded
+                  ? post.discription
+                  : `${post.discription.slice(0, 500)}...`}
+              </p>
             </div>
-          )}
-          <Rate style={{ padding: "25px" }} value={post.rating} />
-          <div style={{ textAlign: "right", marginTop: "10px" }}>
-            <Button
-              className="text-white"
-              type="link"
-              onClick={() => toggleDescription(post.id)}
-            >
-              {post.isExpanded ? "See Less" : "See More"}
-            </Button>
+            {post.images && post.images.length > 0 && (
+              <div className="uploaded-image">
+                <img
+                  src={post.images[0].path}
+                  alt="Post"
+                  style={{ maxWidth: "55%" }}
+                />
+              </div>
+            )}
+            <Rate
+              style={{ padding: "25px" }}
+              value={post.rating}
+              allowHalf
+              disabled
+            />
+            <div style={{ textAlign: "right", marginTop: "10px" }}>
+              {post.discription.length > 500 && (
+                <Button
+                  className="text-white"
+                  type="link"
+                  onClick={() => toggleDescription(post.id)}
+                >
+                  {post.isExpanded ? "See Less" : "See More"}
+                </Button>
+              )}
+            </div>
           </div>
-        </div>
-      ))}
-    </div>
+        ))}
+      </div>
+      <div
+        style={{ display: "flex", justifyContent: "center", marginTop: "40px" }}
+      >
+        <Pagination
+          current={currentPage}
+          total={posts.length}
+          pageSize={POSTS_PER_PAGE}
+          onChange={handlePageChange}
+          showSizeChanger={false}
+        />
+      </div>
+    </>
   );
 };
 

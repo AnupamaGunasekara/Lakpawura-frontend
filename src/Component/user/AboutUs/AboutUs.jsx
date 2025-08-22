@@ -4,10 +4,12 @@ import { FacebookOutlined, TwitterOutlined, InstagramOutlined, PhoneOutlined, Gl
 import './AboutUs.css';
 import logo from '../../../assets/logo.png';
 import { useNavigate } from 'react-router-dom';
+import Footer from "../Footer/Footer";
 
 const AboutUs = () => {
   const navigate = useNavigate();
   return (
+    <>
     <div className="about-us">
       <section className="company-overview-section">
         <div className="overlay">
@@ -79,39 +81,11 @@ const AboutUs = () => {
         </Row>
       </section>
 
-      <footer className="about-us-footer section">
-        <Row gutter={16} justify="center">
-          <Col span={4}>
-            <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer">
-              <FacebookOutlined style={{ fontSize: '24px', color: '#3b5998' }} />
-            </a>
-          </Col>
-          <Col span={4}>
-            <a href="https://www.twitter.com" target="_blank" rel="noopener noreferrer">
-              <TwitterOutlined style={{ fontSize: '24px', color: '#1DA1F2' }} />
-            </a>
-          </Col>
-          <Col span={4}>
-            <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer">
-              <InstagramOutlined style={{ fontSize: '24px', color: '#E1306C' }} />
-            </a>
-          </Col>
-        </Row>
-        <Row gutter={16} justify="center" style={{ marginTop: '20px' }}>
-          <Col span={12} xs={24} sm={12} md={6}>
-            <PhoneOutlined style={{ marginRight: '10px' }} />
-            +1 (123) 456-7890
-          </Col>
-          <Col span={12} xs={24} sm={12} md={6}>
-            <GlobalOutlined style={{ marginRight: '10px' }} />
-            www.lakpawra.com
-          </Col>
-        </Row>
-        <Row justify="center" style={{ marginTop: '20px' }}>
-          <Button type="primary" size="large" onClick={() => navigate("/contact")}>Contact Us</Button>
-        </Row>
-      </footer>
+      
     </div>
+    <Footer/>
+
+    </>
   );
 };
 

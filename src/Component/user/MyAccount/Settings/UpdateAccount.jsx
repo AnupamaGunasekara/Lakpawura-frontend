@@ -5,6 +5,7 @@ import axios from "axios";
 import "./UpdateAccount.css";
 import Cookies from "js-cookie";
 import { jwtDecode } from "jwt-decode";
+import Footer from "../../Footer/Footer";
 
 function UpdateAccount() {
   const base_url = import.meta.env.VITE_APP_BACKEND_URL;
@@ -152,6 +153,8 @@ function UpdateAccount() {
   };
 
   return (
+
+    <>
     <div className="position">
       <form>
         <h2>Update Account</h2>
@@ -314,6 +317,8 @@ function UpdateAccount() {
       <br />
       <br />
     </div>
+<Footer/>
+    </>
   );
 }
 

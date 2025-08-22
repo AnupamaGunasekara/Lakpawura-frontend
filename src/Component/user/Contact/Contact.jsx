@@ -5,6 +5,7 @@ import { Button, Col, Container, Row } from 'react-bootstrap';
 import {message as antdMessage } from 'antd';
 import contactImg from '../../../assets/contact-img.svg';
 import './Contact.css';
+import Footer from '../Footer/Footer';
 
 const Contact = () => {
     const base_url = import.meta.env.VITE_APP_BACKEND_URL;
@@ -108,7 +109,9 @@ const Contact = () => {
                     </Row>
                 </Container>
             </section>
-            <footer className="about-us-footer section">
+
+            <Footer/>
+            {/* <footer className="about-us-footer section">
                 <Container>
                     <Row gutter={16} justify="center">
                         <Col span={4}>
@@ -146,7 +149,7 @@ const Contact = () => {
                         <Button type="primary" size="large">Contact Us</Button>
                     </Row>
                 </Container>
-            </footer>
+            </footer> */}
         </>
     );
 };

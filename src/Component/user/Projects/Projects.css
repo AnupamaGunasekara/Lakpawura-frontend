@@ -1,33 +1,46 @@
 body {
   background-color: #f0f2f5; /* Light gray background */
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   margin: 0;
   padding: 0;
 }
 
-.container-1 {
+/* --- Main Layout Fixes --- */
+
+.project-page-layout {
   display: flex;
-  height: 100vh;
+  flex-direction: column;
+  min-height: 100vh; /* This makes the entire page at least as tall as the screen */
+}
+
+.container-1 {
+  display: flex; /* This correctly lays out the sidebar and main content side-by-side */
+  flex-grow: 1; /* This is the key: it makes the content area expand to push the footer down */
+  /* REMOVED the conflicting 'height: 100vh;' rule from here */
 }
 
 .menu-div {
-  height: 100vh;
+  /* REMOVED 'height: 100vh;' to allow the flex container to manage height */
   background-color: white;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-}
-
-.navbar-post {
-  width: 20%;
 }
 
 .container-post {
   width: 80%;
   padding: 20px;
-  /* background-color: white;
-  border-left: 1px solid #e8e8e8; */
-  /* overflow-y: auto; */
   display: flex;
   flex-direction: column;
+  /* REMOVED 'min-height: 80vh;' which was fighting the main layout */
+}
+
+.posts-container {
+  flex: 1; /* This ensures the posts container takes up available space within .container-post */
+}
+
+/* --- Rest of your styles --- */
+
+.navbar-post {
+  width: 20%;
 }
 
 .create-post-button {
@@ -69,7 +82,7 @@ body {
 }
 
 .post {
-  background-color: rgba(255, 255, 255, 0.3) ;
+  background-color: rgba(255, 255, 255, 0.3);
   padding: 20px;
   margin-bottom: 20px;
   border-radius: 10px;
@@ -81,22 +94,6 @@ body {
   height: auto;
   border-radius: 10px;
   margin-top: 10px;
-}
-
-.pagination {
-  display: flex;
-  justify-content: center;
-  margin-top: 20px;
-}
-
-.container-post {
-  display: flex;
-  flex-direction: column;
-  min-height: 80vh; /* Adjust this based on your layout */
-}
-
-.posts-container {
-  flex: 1;
 }
 
 .pagination-container {
@@ -118,4 +115,20 @@ body {
   margin-top: 10px;
 }
 
+.ant-pagination-prev .ant-pagination-item-link,
+.ant-pagination-next .ant-pagination-item-link {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
 
+.ant-pagination-prev .ant-pagination-item-link svg,
+.ant-pagination-next .ant-pagination-item-link svg {
+  visibility: visible !important;
+  display: inline-block !important;
+  fill: white !important;
+}
+
+.ant-pagination-disabled .ant-pagination-item-link svg {
+  fill: rgba(255, 255, 255, 0.4) !important;
+}

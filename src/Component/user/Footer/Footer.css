@@ -1,0 +1,91 @@
+/* Variable for the main accent color from your design */
+:root {
+  --primary-accent-color: rgb(220, 173, 124);
+}
+
+.site-footer {
+  background-color: #1a1a1a;
+  color: #d9d9d9;
+  padding: 60px 0 20px 0; /* Added padding to bottom */
+  line-height: 1.7;
+}
+
+.footer-col {
+  margin-bottom: 30px; /* Adds space between columns on mobile */
+}
+
+.footer-logo {
+  width: 80px;
+  height: auto;
+  margin-bottom: 15px;
+}
+
+.footer-title {
+  color: #ffffff;
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+
+.footer-text {
+  color: #a6a6a6;
+}
+
+.contact-info .footer-text {
+  margin-bottom: 10px;
+}
+
+.contact-info .bi {
+  margin-right: 12px;
+  color: var(--primary-accent-color);
+}
+
+.footer-links .nav-link {
+  color: #a6a6a6;
+  padding: 0.3rem 0; /* Tighter spacing */
+  position: relative;
+  display: inline-block; /* Important for centering the underline */
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-links .nav-link:hover {
+  color: #ffffff;
+}
+
+/* Animated underline for links */
+.footer-link::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: var(--primary-accent-color);
+  transform-origin: bottom center;
+  transition: transform 0.3s ease-out;
+}
+
+.footer-link:hover::after {
+  transform: scaleX(0.6); /* Underline is 60% of text width */
+  transform-origin: bottom center;
+}
+
+.social-icons a {
+  color: #a6a6a6;
+  font-size: 24px;
+  margin: 0 15px;
+  transition: color 0.3s ease, transform 0.3s ease;
+  display: inline-block; /* Needed for transform */
+}
+
+.social-icons a:hover {
+  color: var(--primary-accent-color);
+  transform: translateY(-3px);
+}
+
+.footer-bottom {
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 1px solid #333;
+}
