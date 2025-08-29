@@ -45,7 +45,7 @@ function Footer() {
             <h4 className="footer-title">Connect With Us</h4>
             <div className="contact-info">
               <p className="footer-text">
-                <i className="bi bi-telephone-fill"></i> +1 (123) 456-7890
+                <i className="bi bi-telephone-fill"></i> +94 76 108 2676
               </p>
               <p className="footer-text">
                 <i className="bi bi-globe"></i> www.lakpawra.com
@@ -53,14 +53,20 @@ function Footer() {
             </div>
             <h5 className="footer-title mt-4">Follow Us</h5>
             <div className="social-icons">
-              <a href="https://facebook.com" aria-label="Facebook">
+              <a
+                href="https://www.facebook.com/share/16h3Adq6x4/?mibextid=wwXIfr"
+                aria-label="Facebook"
+              >
                 <i className="bi bi-facebook"></i>
               </a>
               <a href="https://twitter.com" aria-label="Twitter">
                 <i className="bi bi-twitter-x"></i>
               </a>
-              <a href="https://instagram.com" aria-label="Instagram">
-                <i className="bi bi-instagram"></i>
+              <a
+                href="https://youtube.com/@lakpawura-3768?si=ERYoYTVm1VrdQhrR"
+                aria-label="Instagram"
+              >
+                <i className="bi bi-youtube"></i>
               </a>
             </div>
           </Col>

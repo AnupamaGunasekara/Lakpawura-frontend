@@ -13,10 +13,26 @@ import { useNavigate } from "react-router-dom";
 import { Button, Row, Col, Card } from "antd";
 import ProjectCard from "../../Component/user/Projects/ProjectCard";
 import Footer from "../../Component/user/Footer/Footer";
+
 function LandingPage() {
   const navigate = useNavigate();
   return (
     <>
+      <style>
+        {`
+   .team-members .ant-row {
+  justify-content: center;
+}
+ 
+/* This rule centers the last card when it is alone in a row */
+@media (max-width: 991px) { /* Applies to md and sm breakpoints */
+  .ant-row > .ant-col:last-of-type:nth-child(odd) {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+      `}
+      </style>
       <Navbar className="navigation-bar" expand="lg">
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
@@ -76,7 +92,10 @@ function LandingPage() {
             <div className="overlay">
               <header className="about-us-header">
                 {/* <img src={logo} alt="Your Logo" className="logo" /> */}
-                <h1 className="highlighted">About Us</h1>
+                <h1 className="highlighted">
+                  <span class="word-about">About</span>
+                  <span class="word-us"> Us</span>
+                </h1>
               </header>
               <div className="company-info">
                 <h2>Our Company</h2>
@@ -108,8 +127,202 @@ function LandingPage() {
               </div>
             </div>
           </section>
+          <section className="team-members section">
+            <h2>Meet Our Team</h2>
+            <Row gutter={16}>
+              <Col xs={24} sm={12} md={8} lg={8}>
+                <Card
+                  hoverable
+                  cover={
+                    <img
+                      alt="W.A.S. THILAKARATHNE"
+                      src="/images/person-1.jpg"
+                    />
+                  }
+                >
+                  <Card.Meta
+                    title="W.A.S. THILAKARATHNE"
+                    description="President"
+                  />
+                  <p>  thilakarathnawas@gmail.com</p>
+                </Card>
+              </Col>
+              <Col xs={24} sm={12} md={8} lg={8}>
+                <Card
+                  hoverable
+                  cover={
+                    <img alt="G. DISSANAYAKE" src="/images/person-2.jpg" />
+                  }
+                >
+                  <Card.Meta title="G. DISSANAYAKE" description="Secretary" />
+                  <p>dissadissa1955/@ gmail.com</p>
+                </Card>
+              </Col>
+              <Col xs={24} sm={12} md={8} lg={8}>
+                <Card
+                  hoverable
+                  cover={<img alt="S. UDAYANGA" src="/images/person-3.jpg" />}
+                >
+                  <Card.Meta title="S. UDAYANGA" description="Treasurer" />
+                  <p>sudayanga2000@gmail.com</p>
+                </Card>
+              </Col>
+              <Col xs={24} sm={12} md={8} lg={8}>
+                <Card
+                  hoverable
+                  cover={
+                    <img
+                      alt="T.A.C. DESHAPRIYA
+            SAMPATH"
+                      src="/images/person-4.jpg"
+                    />
+                  }
+                >
+                  <Card.Meta
+                    title="T.A.C. DESHAPRIYA
+            SAMPATH"
+                    description="Chief Organizer"
+                  />
+                  <p>chanaka@chanuwta.com</p>
+                </Card>
+              </Col>
+              <Col xs={24} sm={12} md={8} lg={8}>
+                <Card
+                  hoverable
+                  cover={
+                    <img
+                      alt="P.G.M.N.
+            WICKRAMATHILAKA"
+                      src="/images/person-5.jpg"
+                    />
+                  }
+                >
+                  <Card.Meta
+                    title="P.G.M.N.
+            WICKRAMATHILAKA"
+                    description="Vice President"
+                  />
+                  <p>nishantha600k@gmail.com </p>
+                </Card>
+              </Col>
+              <Col xs={24} sm={12} md={8} lg={8}>
+                <Card
+                  hoverable
+                  cover={
+                    <img alt="K.I. DARSHANEE" src="/images/person-6.jpg" />
+                  }
+                >
+                  <Card.Meta
+                    title="K.I. DARSHANEE"
+                    description="Vice Secretary"
+                  />
+                  <p>darshaniiresha@.gmail.com</p>
+                </Card>
+              </Col>
+              <Col xs={24} sm={12} md={8} lg={8}>
+                <Card
+                  hoverable
+                  cover={
+                    <img alt="E.K.S. EDIRISINGHE" src="/images/person-7.jpg" />
+                  }
+                >
+                  <Card.Meta
+                    title="E.K.S. EDIRISINGHE"
+                    description="Vice Treasurer"
+                  />
+                  <p>11shvama73@gmail.com</p>
+                </Card>
+              </Col>
+              <Col xs={24} sm={12} md={8} lg={8}>
+                <Card
+                  hoverable
+                  cover={
+                    <img
+                      alt="SARATH
+            KAHADAADRACHCHI"
+                      src="/images/person-8.jpg"
+                    />
+                  }
+                >
+                  <Card.Meta
+                    title="SARATH
+            KAHADAADRACHCHI"
+                    description="Organizer"
+                  />
+                  <p>sarath@rodrigoenterprises.com</p>
+                </Card>
+              </Col>
+              <Col xs={24} sm={12} md={8} lg={8}>
+                <Card
+                  hoverable
+                  cover={
+                    <img alt="B.M.P. BASNAYAKA" src="/images/person-9.jpg" />
+                  }
+                >
+                  <Card.Meta title="B.M.P. BASNAYAKA" description="Organizer" />
+                  <p>bmpbasnayaka1970@gmail.com</p>
+                </Card>
+              </Col>
+              <Col xs={24} sm={12} md={8} lg={8}>
+                <Card
+                  hoverable
+                  cover={
+                    <img
+                      alt="S.A.C.K DHAMAYANTHI"
+                      src="/images/person-10.jpg"
+                    />
+                  }
+                >
+                  <Card.Meta
+                    title="S.A.C.K DHAMAYANTHI"
+                    description="Orgunizer"
+                  />
+                  <p>Lakpawura@gmail.com</p>
+                </Card>
+              </Col>
+              <Col xs={24} sm={12} md={8} lg={8}>
+                <Card
+                  hoverable
+                  cover={
+                    <img alt="K.L. GUNARATHNE" src="/images/person-11.jpg" />
+                  }
+                >
+                  <Card.Meta title="K.L. GUNARATHNE" description="Orgunizer" />
+                  <p>npdfg@yahoo.com</p>
+                </Card>
+              </Col>
+              <Col xs={24} sm={12} md={8} lg={8}>
+                <Card
+                  hoverable
+                  cover={
+                    <img alt="S.A.C. SENADEERA" src="/images/person-12.jpg" />
+                  }
+                >
+                  <Card.Meta title="S.A.C. SENADEERA" description="Orgunizer" />
+                  <p>chandsenadeera@gmail.com</p>
+                </Card>
+              </Col>
+              <Col xs={24} sm={12} md={8} lg={8}>
+                <Card
+                  hoverable
+                  cover={
+                    <img
+                      alt="B.M. SALIYA SRIYANTHA"
+                      src="/images/person-13.jpg"
+                    />
+                  }
+                >
+                  <Card.Meta
+                    title="B.M. SALIYA SRIYANTHA"
+                    description="E Member"
+                  />
+                  <p>saliyasriyantha92@gmail.com</p>
+                </Card>
+              </Col>
+            </Row>
+          </section>
 
-          <section className="services section">
+          {/* <section className="services section">
             <h2>Our Services</h2>
             <Row gutter={16}>
               <Col span={8}>
@@ -161,7 +374,7 @@ function LandingPage() {
                 </Card>
               </Col>
             </Row>
-          </section>
+          </section> */}
 
           {/* <footer className="about-us-footer section">
             <Row gutter={16} justify="center">
