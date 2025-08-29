@@ -16,6 +16,21 @@ const AboutUs = () => {
   const navigate = useNavigate();
   return (
     <>
+      <style>
+        {`
+   .team-members .ant-row {
+  justify-content: center;
+}
+ 
+/* This rule centers the last card when it is alone in a row */
+@media (max-width: 991px) { /* Applies to md and sm breakpoints */
+  .ant-row > .ant-col:last-of-type:nth-child(odd) {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+      `}
+      </style>
       <div className="about-us">
         <section className="company-overview-section">
           <div className="overlay">
